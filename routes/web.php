@@ -8,6 +8,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\LeaveController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -31,8 +33,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/attendance/check-out', [AttendanceController::class, 'checkOut'])->name('attendance.checkOut');
     Route::get('/my-attendance', [AttendanceController::class, 'myAttendance'])->name('attendance.my');
 
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+
     Route::middleware([RoleMiddleware::class . ':admin'])->group(function () {
-        Route::resource('/employees',EmployeeController::class);
+        Route::resource('/employees', EmployeeController::class);
         Route::get('/attendances-report', [AttendanceController::class, 'report'])->name('attendances.report');
     });
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/leave', [LeaveController::class, 'index'])->name('leave');
+        Route::post('/leave', [LeaveController::class, 'store'])->name('leave.store');
+    });
+
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 });
