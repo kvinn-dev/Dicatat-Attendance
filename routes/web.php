@@ -7,7 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AttendanceController;
-
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -23,16 +23,16 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/profile', function () {
-        return view('profile.edit');
-    })->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/password', [ProfileController::class, 'password'])->name('profile.password');
 
     Route::post('/attendance/check-in', [AttendanceController::class, 'checkIn'])->name('attendance.checkIn');
     Route::post('/attendance/check-out', [AttendanceController::class, 'checkOut'])->name('attendance.checkOut');
     Route::get('/my-attendance', [AttendanceController::class, 'myAttendance'])->name('attendance.my');
 
     Route::middleware([RoleMiddleware::class . ':admin'])->group(function () {
-        Route::resource('/employees', EmployeeController::class);
-        Route::get('/attendance-report', [AttendanceController::class, 'report'])->name('attendance.report');
+        Route::resource('/employees',EmployeeController::class);
+        Route::get('/attendances-report', [AttendanceController::class, 'report'])->name('attendances.report');
     });
 });

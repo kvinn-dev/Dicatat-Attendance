@@ -1,38 +1,63 @@
-<x-app-layout>
-    <div class="flex items-center justify-between mb-6">
-        <h2 class="text-3xl font-bold tracking-tight">Attendance Report</h2>
-        <form method="GET" class="flex gap-2">
-            <input type="date" name="date" value="{{ request('date') }}" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
-            <x-ui.button type="submit" variant="outline">Filter</x-ui.button>
+@extends('layouts.app')
+
+@section('content')
+<div class="space-y-6">
+    <!-- Header & Filter -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Laporan Absensi Karyawan</h2>
+        <form method="GET" class="flex gap-2 items-center">
+            <input type="date" name="date" value="{{ request('date') }}" 
+                   class="h-10 rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <button type="submit" 
+                    class="h-10 px-4 py-2 rounded-lg border border-indigo-500 text-indigo-600 hover:bg-indigo-50 dark:text-indigo-400 dark:border-indigo-400 dark:hover:bg-gray-700 text-sm font-medium transition">
+                Filter
+            </button>
         </form>
     </div>
 
-    <x-ui.card>
-        <x-ui.table>
-            <x-slot name="header">
-                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Date</th>
-                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Employee</th>
-                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Status</th>
-                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Check In</th>
-                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Check Out</th>
-            </x-slot>
-            @foreach($attendances as $attendance)
-            <tr class="border-b transition-colors hover:bg-muted/50">
-                <td class="p-4 align-middle">{{ $attendance->date }}</td>
-                <td class="p-4 align-middle">
-                    <div class="flex flex-col">
-                        <span class="font-medium">{{ $attendance->employee->user->name }}</span>
-                        <span class="text-xs text-muted-foreground">{{ $attendance->employee->employee_id }}</span>
-                    </div>
-                </td>
-                <td class="p-4 align-middle">{{ ucfirst($attendance->status) }}</td>
-                <td class="p-4 align-middle">{{ \Carbon\Carbon::parse($attendance->check_in)->format('H:i A') }}</td>
-                <td class="p-4 align-middle">{{ $attendance->check_out ? \Carbon\Carbon::parse($attendance->check_out)->format('H:i A') : '-' }}</td>
-            </tr>
-            @endforeach
-        </x-ui.table>
-        <div class="p-4">
+    <!-- Attendance Table -->
+    <div class="overflow-x-auto rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead class="bg-gray-50 dark:bg-gray-700/50">
+                <tr>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Tanggal</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Nama Karyawan</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Check In</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Check Out</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
+                @forelse($attendances as $attendance)
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
+                    <td class="px-4 py-3">{{ \Carbon\Carbon::parse($attendance->date)->format('d M Y') }}</td>
+                    <td class="px-4 py-3">
+                        <div class="flex flex-col">
+                            <span class="font-medium text-gray-900 dark:text-white">{{ $attendance->employee->user->name ?? '-' }}</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400">{{ $attendance->employee->employee_id ?? '-' }}</span>
+                        </div>
+                    </td>
+                    <td class="px-4 py-3">
+                        <span class="px-2 py-1 inline-flex text-xs font-semibold rounded-full
+                            {{ $attendance->status === 'late' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300' : ($attendance->status === 'present' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300') }}">
+                            {{ ucfirst($attendance->status ?? '-') }}
+                        </span>
+                    </td>
+                    <td class="px-4 py-3">{{ \Carbon\Carbon::parse($attendance->check_in)->format('H:i A') }}</td>
+                    <td class="px-4 py-3">{{ $attendance->check_out ? \Carbon\Carbon::parse($attendance->check_out)->format('H:i A') : '-' }}</td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="5" class="px-4 py-4 text-center text-gray-500 dark:text-gray-400">No attendance records found.</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="px-4 py-3 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
             {{ $attendances->links() }}
         </div>
-    </x-ui.card>
-</x-app-layout>
+    </div>
+</div>
+@endsection

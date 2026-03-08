@@ -60,6 +60,10 @@ class AttendanceController extends Controller
             return back()->with('error', 'You have not checked in yet');
         }
 
+        if ($attendance->check_out) {
+            return back()->with('error', 'You have already checked out today');
+        }
+
         $attendance->update([
             'check_out' => Carbon::now()->toTimeString(),
         ]);
@@ -77,6 +81,6 @@ class AttendanceController extends Controller
 
         $attendances = $query->orderBy('date', 'desc')->paginate(10);
 
-        return view('attendance.report', compact('attendances'));
+        return view('attendances.report', compact('attendances'));
     }
 }

@@ -2,15 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User; // atau model Employee
+use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // tampilkan daftar karyawan
-        $employees = User::where('role', 'employee')-> paginate(10);
+        $query = Employee::with('user')->whereHas('user', function ($q) {
+            $q->where('role', 'employee'); // hanya employee
+        });
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->whereHas('user', function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%");
+            });
+        }
+
+        $employees = $query->paginate(10)->withQueryString();
+
         return view('employees.index', compact('employees'));
     }
 
@@ -24,43 +36,64 @@ class EmployeeController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'role' => 'required|in:employee',
+            'department' => 'nullable|string|max:255',
+            'position' => 'nullable|string|max:255',
         ]);
 
-        User::create($request->all());
+        // buat User dengan role employee
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => 'employee',
+            'password' => bcrypt('password123'), // default password
+        ]);
+
+        // buat Employee terkait
+        $user->employee()->create([
+            'department' => $request->department,
+            'position' => $request->position,
+            'status' => 'active',
+        ]);
 
         return redirect()->route('employees.index')->with('success', 'Karyawan berhasil ditambahkan.');
     }
 
-    public function show($id)
-    {
-        $employee = User::findOrFail($id);
-        return view('employees.show', compact('employee'));
-    }
-
     public function edit($id)
     {
-        $employee = User::findOrFail($id);
+        $employee = Employee::with('user')->findOrFail($id);
         return view('employees.edit', compact('employee'));
     }
 
     public function update(Request $request, $id)
     {
-        $employee = User::findOrFail($id);
+        $employee = Employee::with('user')->findOrFail($id);
+
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $id,
+            'email' => 'required|email|unique:users,email,' . $employee->user->id,
+            'department' => 'nullable|string|max:255',
+            'position' => 'nullable|string|max:255',
         ]);
 
-        $employee->update($request->all());
+        // update User
+        $employee->user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        // update Employee
+        $employee->update([
+            'department' => $request->department,
+            'position' => $request->position,
+        ]);
 
         return redirect()->route('employees.index')->with('success', 'Data karyawan berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
-        $employee = User::findOrFail($id);
-        $employee->delete();
+        $employee = Employee::with('user')->findOrFail($id);
+        $employee->user->delete(); // otomatis hapus Employee jika FK cascade
 
         return redirect()->route('employees.index')->with('success', 'Karyawan berhasil dihapus.');
     }

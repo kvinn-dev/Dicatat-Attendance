@@ -5,8 +5,8 @@
 
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
-            <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Welcome back, {{ auth()->user()->name }}!</h2>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Here's what's happening with your workforce today.</p>
+            <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Selamat Datang, {{ auth()->user()->name }}!</h2>
+            <!-- <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Here's what's happening with your workforce today.</p> -->
         </div>
 
         @if(auth()->user()->role === 'employee')
@@ -54,7 +54,7 @@
         <div class="rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Employees</p>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Karyawan</p>
                     <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $stats['total_employees'] }}</p>
                 </div>
                 <div class="p-3 bg-indigo-50 dark:bg-indigo-900/50 rounded-lg text-indigo-600 dark:text-indigo-400">
@@ -67,7 +67,7 @@
         <div class="rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Present Today</p>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Hadir Hari Ini</p>
                     <p class="text-3xl font-bold text-green-600 dark:text-green-400 mt-2">{{ $stats['present_today'] }}</p>
                 </div>
                 <div class="p-3 bg-green-50 dark:bg-green-900/50 rounded-lg text-green-600 dark:text-green-400">
@@ -80,7 +80,7 @@
         <div class="rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Late Today</p>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Telat Hari Ini</p>
                     <p class="text-3xl font-bold text-yellow-600 dark:text-yellow-400 mt-2">{{ $stats['late_today'] }}</p>
                 </div>
                 <div class="p-3 bg-yellow-50 dark:bg-yellow-900/50 rounded-lg text-yellow-600 dark:text-yellow-400">
@@ -93,7 +93,7 @@
         <div class="rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Absent Today</p>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Tidak Hadir Hari Ini</p>
                     <p class="text-3xl font-bold text-red-600 dark:text-red-400 mt-2">{{ $stats['absent_today'] }}</p>
                 </div>
                 <div class="p-3 bg-red-50 dark:bg-red-900/50 rounded-lg text-red-600 dark:text-red-400">
@@ -106,13 +106,13 @@
     <!-- Recent Activity -->
     <div class="rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
         <div class="p-6 border-b border-gray-100 dark:border-gray-700">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Recent Attendance Activity</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Aktivitas Kehadiran Terbaru</h3>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm text-left">
                 <thead class="text-xs text-gray-500 uppercase bg-gray-50 dark:bg-gray-700/50 dark:text-gray-400">
                     <tr>
-                        <th class="px-6 py-4 font-medium">Employee</th>
+                        <th class="px-6 py-4 font-medium">Nama Karyawan</th>
                         <th class="px-6 py-4 font-medium">Status</th>
                         <th class="px-6 py-4 font-medium">Check In</th>
                         <th class="px-6 py-4 font-medium">Check Out</th>
