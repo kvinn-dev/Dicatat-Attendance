@@ -16,23 +16,23 @@
                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Check In</th>
                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Check Out</th>
             </x-slot>
-            @foreach($attendances as )
+            @foreach($attendances as $attendance)
             <tr class="border-b transition-colors hover:bg-muted/50">
-                <td class="p-4 align-middle">{{ ->date }}</td>
+                <td class="p-4 align-middle">{{ $attendance->date }}</td>
                 <td class="p-4 align-middle">
                     <div class="flex flex-col">
-                        <span class="font-medium">{{ ->employee->user->name }}</span>
-                        <span class="text-xs text-muted-foreground">{{ ->employee->employee_id }}</span>
+                        <span class="font-medium">{{ $attendance->employee->user->name }}</span>
+                        <span class="text-xs text-muted-foreground">{{ $attendance->employee->employee_id }}</span>
                     </div>
                 </td>
-                <td class="p-4 align-middle">{{ ucfirst(->status) }}</td>
-                <td class="p-4 align-middle">{{ \Carbon\Carbon::parse(->check_in)->format('H:i A') }}</td>
-                <td class="p-4 align-middle">{{ ->check_out ? \Carbon\Carbon::parse(->check_out)->format('H:i A') : '-' }}</td>
+                <td class="p-4 align-middle">{{ ucfirst($attendance->status) }}</td>
+                <td class="p-4 align-middle">{{ \Carbon\Carbon::parse($attendance->check_in)->format('H:i A') }}</td>
+                <td class="p-4 align-middle">{{ $attendance->check_out ? \Carbon\Carbon::parse($attendance->check_out)->format('H:i A') : '-' }}</td>
             </tr>
             @endforeach
         </x-ui.table>
         <div class="p-4">
-            {{ ->links() }}
+            {{ $attendances->links() }}
         </div>
     </x-ui.card>
 </x-app-layout>

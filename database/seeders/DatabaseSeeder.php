@@ -17,11 +17,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
             'password' => Hash::make('admin123'), // password yang diketahui
             'role' => 'admin',
+        ]);
+
+        Employee::create([
+            'user_id' => $admin->id,
+            'employee_id' => 'EMP-001',
+            'department' => 'Management',
+            'position' => 'Administrator',
+            'status' => 'active',
         ]);
 
         // User default: Kevin
@@ -34,11 +42,12 @@ class DatabaseSeeder extends Seeder
 
         Employee::create([
             'user_id' => $kevin->id,
-            'employee_id' => 'EMP-001',
-            'department' => 'IT',
-            'position' => 'Software Engineer',
+            'employee_id' => 'EMP-002',
+            'department' => 'Engineering',
+            'position' => 'Backend Developer',
+            'status' => 'active',
         ]);
-        
+
         User::factory(50)->create();
     }
 }

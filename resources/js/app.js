@@ -1,2 +1,2 @@
 import './bootstrap';
-import './tailwind.css';
+import '../css/app.css';

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('department');
             $table->string('position');
             $table->string('phone')->nullable();
+            $table->string('status')->default('active');
             $table->timestamps();
         });
 
