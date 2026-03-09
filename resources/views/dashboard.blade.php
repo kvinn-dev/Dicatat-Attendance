@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-slot name="header">Dashboard</x-slot>
 
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>

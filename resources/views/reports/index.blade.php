@@ -1,13 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<x-slot name="header">Laporan Kehadiran</x-slot>
 
 <div class="space-y-6">
     <!-- Page Title & Intro -->
     <div class="flex flex-col gap-2">
         <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Ringkasan Analitik
+            Laporan Analisis
         </h2>
         <p class="text-sm text-gray-500 dark:text-gray-400">
             Statistik kehadiran Anda di tahun {{ date('Y') }}.

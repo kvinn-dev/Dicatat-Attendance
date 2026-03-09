@@ -9,9 +9,9 @@ use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
-    public function edit()
+    public function index()
     {
-        return view('profile.edit', [
+        return view('profile.index', [
             'user' => Auth::user()
         ]);
     }

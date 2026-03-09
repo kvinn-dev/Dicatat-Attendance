@@ -21,7 +21,7 @@ class LeaveController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('leave', compact('leaves'));
+        return view('leave.index', compact('leaves'));
     }
 
     public function store(Request $request)

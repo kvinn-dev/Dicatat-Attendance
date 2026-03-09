@@ -71,7 +71,7 @@ class AttendanceController extends Controller
         return back()->with('success', 'Checked out successfully.');
     }
 
-    public function report(Request $request)
+    public function index(Request $request)
     {
         $query = Attendance::with('employee.user');
 
@@ -81,6 +81,6 @@ class AttendanceController extends Controller
 
         $attendances = $query->orderBy('date', 'desc')->paginate(10);
 
-        return view('attendances.report', compact('attendances'));
+        return view('attendances.index', compact('attendances'));
     }
 }

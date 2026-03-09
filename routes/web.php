@@ -10,6 +10,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\SettingsController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -25,7 +26,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'password'])->name('profile.password');
 
@@ -37,13 +38,16 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware([RoleMiddleware::class . ':admin'])->group(function () {
         Route::resource('/employees', EmployeeController::class);
-        Route::get('/attendances-report', [AttendanceController::class, 'report'])->name('attendances.report');
+        Route::get('/attendances-index', [AttendanceController::class, 'index'])->name('attendances.index');
     });
 
     Route::middleware(['auth'])->group(function () {
-        Route::get('/leave', [LeaveController::class, 'index'])->name('leave');
+        Route::get('/leave', [LeaveController::class, 'index'])->name('leave.index');
         Route::post('/leave', [LeaveController::class, 'store'])->name('leave.store');
     });
 
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+
 });
