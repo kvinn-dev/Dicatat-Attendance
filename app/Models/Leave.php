@@ -22,4 +22,13 @@ class Leave extends Model
     {
         return $this->belongsTo(Employee::class);
     }
+
+    public function getStatusLabelAttribute()
+    {
+        return [
+            'approved' => 'Disetujui',
+            'pending' => 'Menunggu',
+            'rejected' => 'Ditolak'
+        ][$this->status] ?? $this->status;
+    }
 }

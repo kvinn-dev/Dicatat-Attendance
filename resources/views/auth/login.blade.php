@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Attendance System</title>
+    <title>Masuk - Dicatat</title>
     <!-- Menggunakan Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Inter untuk tampilan yang lebih modern -->
@@ -52,11 +52,11 @@
                     
                     <!-- Input Email -->
                     <div class="space-y-1">
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                         <div class="relative">
                             <input type="email" name="email" id="email" 
                                 class="block w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 @error('email') border-red-500 ring-red-200 @enderror"
-                                placeholder="nama@perusahaan.com" 
+                                placeholder="Masukkan Email" 
                                 value="{{ old('email') }}" 
                                 required autofocus>
                         </div>
@@ -67,11 +67,11 @@
 
                     <!-- Input Password -->
                     <div class="space-y-1">
-                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <label for="password" class="block text-sm font-medium text-gray-700">Kata Sandi</label>
                         <div class="relative">
                             <input type="password" name="password" id="password" 
                                 class="block w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 @error('password') border-red-500 ring-red-200 @enderror"
-                                placeholder="••••••••" 
+                                placeholder="Masukkan Kata Sandi" 
                                 required>
                         </div>
                         @error('password')

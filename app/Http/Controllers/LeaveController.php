@@ -12,14 +12,20 @@ class LeaveController extends Controller
     {
         $user = Auth::user();
 
-        // Pastikan user memiliki data employee
-        if (!$user->employee) {
-            return redirect()->route('dashboard')->with('error', 'Data karyawan tidak ditemukan.');
-        }
+        if ($user->role === 'admin') {
+            // Admin melihat semua pengajuan
+            $leaves = Leave::with('employee.user')->orderBy('created_at', 'desc')->get();
+        } else {
+            // Employee melihat pengajuan sendiri
+            // Pastikan user memiliki data employee
+            if (!$user->employee) {
+                return redirect()->route('dashboard')->with('error', 'Data karyawan tidak ditemukan.');
+            }
 
-        $leaves = Leave::where('employee_id', $user->employee->id)
-            ->orderBy('created_at', 'desc')
-            ->get();
+            $leaves = Leave::where('employee_id', $user->employee->id)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
 
         return view('leave.index', compact('leaves'));
     }
@@ -45,5 +51,17 @@ class LeaveController extends Controller
         ]);
 
         return back()->with('success', 'Pengajuan izin berhasil dikirim.');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:approved,rejected',
+        ]);
+
+        $leave = Leave::findOrFail($id);
+        $leave->update(['status' => $request->status]);
+
+        return back()->with('success', 'Status pengajuan cuti berhasil diperbarui.');
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Attendance System</title>
+    <title>Daftar - Dicatat</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>body { font-family: 'Inter', sans-serif; }</style>
@@ -57,7 +57,7 @@
                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                         <input type="email" name="email" id="email"
                             class="block w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 @error('email') border-red-500 ring-red-200 @enderror"
-                            placeholder="nama@perusahaan.com" value="{{ old('email') }}" required>
+                            placeholder="Masukkan Email" value="{{ old('email') }}" required>
                         @error('email')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -65,10 +65,10 @@
 
                     <!-- Password -->
                     <div class="space-y-1">
-                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <label for="password" class="block text-sm font-medium text-gray-700">Kata Sandi</label>
                         <input type="password" name="password" id="password"
                             class="block w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 @error('password') border-red-500 ring-red-200 @enderror"
-                            placeholder="••••••••" required>
+                            placeholder="Masukkan Kata Sandi" required>
                         @error('password')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -79,7 +79,7 @@
                         <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
                         <input type="password" name="password_confirmation" id="password_confirmation"
                             class="block w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                            placeholder="••••••••" required>
+                            placeholder="Konfirmasi Kata Sandi" required>
                     </div>
 
                     <!-- Role -->

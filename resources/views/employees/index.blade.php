@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<x-slot name="header">Data Karyawan</x-slot>
 
-<div class="space-y-6">
+<div class="space-y-6" x-data="{ showDeleteModal: false, selectedEmployee: null }">
+
     <!-- Toolbar -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <!-- Search -->
@@ -80,9 +80,9 @@
 
                         <!-- Status -->
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                            <span class="px-2 py-0.5 inline-flex text-sm leading-5 font-regular rounded-full
                                 {{ $employee->status === 'inactive' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300' : 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' }}">
-                                {{ ucfirst($employee->status ?? 'active') }}
+                                {{ $employee->status_label ?? 'Active' }}
                             </span>
                         </td>
 
@@ -91,7 +91,6 @@
                             <a href="{{ route('employees.edit', $employee->id) }}"
                                 class="inline-flex items-center justify-center h-8 w-8 rounded-md bg-green-100 dark:bg-green-700 text-green-600 dark:text-green-200 hover:bg-green-200 dark:hover:bg-green-600 transition"
                                 title="Edit">
-                                <!-- Pencil Icon -->
                                 <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15.232 5.232l3.536 3.536M9 11l6-6 3.536 3.536-6 6H9v-3.536z" />
@@ -99,20 +98,15 @@
                             </a>
 
                             <!-- Delete Button -->
-                            <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="inline-flex items-center justify-center h-8 w-8 rounded-md bg-red-100 dark:bg-red-700 text-red-600 dark:text-red-200 hover:bg-red-200 dark:hover:bg-red-600 transition"
-                                    title="Delete"
-                                    onclick="return confirm('Apakah Anda yakin ingin menghapus karyawan ini?')">
-                                    <!-- Trash Icon -->
-                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M1 7h22M8 7V4a1 1 0 011-1h6a1 1 0 011 1v3" />
-                                    </svg>
-                                </button>
-                            </form>
+                            <button
+                                @click.prevent="selectedEmployee = {{ $employee->id }}; showDeleteModal = true"
+                                class="inline-flex items-center justify-center h-8 w-8 rounded-md bg-red-100 dark:bg-red-700 text-red-600 dark:text-red-200 hover:bg-red-200 dark:hover:bg-red-600 transition"
+                                title="Delete">
+                                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M1 7h22M8 7V4a1 1 0 011-1h6a1 1 0 011 1v3" />
+                                </svg>
+                            </button>
                         </td>
                     </tr>
                     @empty
@@ -130,6 +124,43 @@
         <div class="bg-white dark:bg-gray-800 px-4 py-3 border-t border-gray-200 dark:border-gray-700 sm:px-6">
             {{ $employees->links() }}
         </div>
+
+        <!-- Delete Confirmation Modal -->
+        <div x-show="showDeleteModal" x-cloak
+            class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+
+            <div @click.away="showDeleteModal=false"
+                class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-sm shadow-lg transform transition-all"
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95">
+
+                <h3 class="text-lg font-semibold mb-1 text-gray-900 dark:text-white">Konfirmasi Hapus</h3>
+                <p class="text-sm text-gray-700 dark:text-gray-300 mb-7">
+                    Apakah Anda yakin ingin menghapus karyawan ini?
+                </p>
+
+                <div class="flex justify-end gap-2">
+                    <button @click="showDeleteModal=false"
+                        class="px-2.5 py-1 bg-gray-600 text-white text-sm rounded-lg hover:bg-gray-700">
+                        Batal
+                    </button>
+
+                    <form :action="`/employees/${selectedEmployee}`" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="px-2.5 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700">
+                            Ya, hapus
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
+
 @endsection

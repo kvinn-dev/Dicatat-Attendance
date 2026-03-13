@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware([RoleMiddleware::class . ':admin'])->group(function () {
         Route::resource('/employees', EmployeeController::class);
         Route::get('/attendances-index', [AttendanceController::class, 'index'])->name('attendances.index');
+        Route::patch('/leave/{id}', [LeaveController::class, 'update'])->name('leave.update');
     });
 
     Route::middleware(['auth'])->group(function () {
@@ -49,5 +50,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
-
 });
