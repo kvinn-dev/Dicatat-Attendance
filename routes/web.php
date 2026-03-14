@@ -40,16 +40,26 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/employees', EmployeeController::class);
         Route::get('/attendances-index', [AttendanceController::class, 'index'])->name('attendances.index');
         Route::patch('/leave/{id}', [LeaveController::class, 'update'])->name('leave.update');
+        
+        // Notifikasi untuk Admin
+        Route::get('/settings/notification/admin', [SettingsController::class, 'notificationAdmin'])->name('settings.notification.admin');
+        Route::post('/settings/notification/admin', [SettingsController::class, 'storeNotification'])->name('settings.notification.store');
+        Route::put('/settings/notification/admin/{id}', [SettingsController::class, 'updateNotification'])->name('settings.notification.update');
+        Route::delete('/settings/notification/admin/{id}', [SettingsController::class, 'deleteNotification'])->name('settings.notification.delete');
     });
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/leave', [LeaveController::class, 'index'])->name('leave.index');
         Route::post('/leave', [LeaveController::class, 'store'])->name('leave.store');
+        
+        // Notifikasi untuk Karyawan
+        Route::get('/settings/notification', [SettingsController::class, 'notificationEmployee'])->name('settings.notification');
+        Route::patch('/settings/notification/{id}/read', [SettingsController::class, 'markAsRead'])->name('settings.notification.read');
     });
 
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::get('/settings/system-setting', [SettingsController::class, 'system_setting'])->name('settings.system_setting');
-    Route::get('/settings/notification', [SettingsController::class, 'notiication'])->name('settings.notification');
+    Route::post('/settings/system-setting', [SettingsController::class, 'update_system_setting'])->name('settings.system_setting.update');
 });

@@ -60,31 +60,38 @@
                 $navSections = [];
 
                 // Icons
-                $iconDashboard = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />';
-                $iconAttendance = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />';
-                $iconEmployee = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />';
-                $iconLeave = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />';
-                $iconReport = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />';
-                $iconSettings = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />';
+                $iconDashboard = '
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />';
+                $iconAttendance = '
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />';
+                $iconEmployee = '
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />';
+                $iconLeave = '
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />';
+                $iconReport = '
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />';
+                $iconSettings = '
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />';
 
                 if ($user->role === 'admin') {
-                    $navSections['Main Menu'] = [
-                        ['name' => 'Dashboard', 'route' => 'dashboard', 'icon' => $iconDashboard],
-                        ['name' => 'Laporan Absensi', 'route' => 'attendances.index', 'icon' => $iconAttendance],
-                        ['name' => 'Data Karyawan', 'route' => 'employees.index', 'icon' => $iconEmployee],
-                        ['name' => 'Pengajuan Cuti', 'route' => 'leave.index', 'icon' => $iconLeave],
-                    ];
+                $navSections['Main Menu'] = [
+                ['name' => 'Dashboard', 'route' => 'dashboard', 'icon' => $iconDashboard],
+                ['name' => 'Laporan Absensi', 'route' => 'attendances.index', 'icon' => $iconAttendance],
+                ['name' => 'Data Karyawan', 'route' => 'employees.index', 'icon' => $iconEmployee],
+                ['name' => 'Pengajuan Cuti', 'route' => 'leave.index', 'icon' => $iconLeave],
+                ];
                 } else {
-                    // Employee
-                    $navSections['Main Menu'] = [
-                        ['name' => 'Dashboard', 'route' => 'dashboard', 'icon' => $iconDashboard],
-                        ['name' => 'Pengajuan Cuti', 'route' => 'leave.index', 'icon' => $iconLeave],
-                        ['name' => 'Laporan Analisis', 'route' => 'reports.index', 'icon' => $iconReport],
-                    ];
+                // Employee
+                $navSections['Main Menu'] = [
+                ['name' => 'Dashboard', 'route' => 'dashboard', 'icon' => $iconDashboard],
+                ['name' => 'Pengajuan Cuti', 'route' => 'leave.index', 'icon' => $iconLeave],
+                ['name' => 'Laporan Analisis', 'route' => 'reports.index', 'icon' => $iconReport],
+                ];
                 }
 
                 $navSections['System'] = [
-                    ['name' => 'Pengaturan', 'route' => 'settings.index', 'icon' => $iconSettings],
+                ['name' => 'Pengaturan', 'route' => 'settings.index', 'icon' => $iconSettings],
                 ];
                 @endphp
 
@@ -126,17 +133,78 @@
 
                 <!-- Right Side Actions -->
                 <div class="flex items-center ml-auto mr-6 gap-4">
-                    <!-- Theme Toggle -->
-                    <button @click="toggleTheme()" class="p-2 rounded-full text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 focus:outline-none transition-colors">
-                        <!-- Sun Icon -->
-                        <svg x-show="!darkMode" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                        <!-- Moon Icon -->
-                        <svg x-show="darkMode" x-cloak class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                        </svg>
-                    </button>
+                    <!-- Notifications Dropdown -->
+                    @php
+                    $userNotifications = \App\Models\Notification::where(function($query) {
+                    $query->where('user_id', auth()->id())
+                    ->orWhereNull('user_id');
+                    })
+                    ->orderBy('created_at', 'desc')
+                    ->take(5)
+                    ->get()
+                    ->map(function($notif) {
+                    return [
+                    'id' => $notif->id,
+                    'title' => $notif->title,
+                    'description' => $notif->content,
+                    'time' => $notif->created_at->diffForHumans(),
+                    'read' => !is_null($notif->read_at)
+                    ];
+                    });
+                    @endphp
+                    <div x-data="{
+                        open: false,
+                        notifications: {{ Js::from($userNotifications) }},
+                        get unreadCount() {
+                            return this.notifications.filter(n => !n.read).length;
+                        }
+                    }" @click.away="open = false" class="relative">
+                        <button @click="open = !open" class="relative p-2 rounded-full text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 focus:outline-none transition-colors">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+                            <!-- Badge -->
+                            <span x-show="unreadCount > 0" x-text="unreadCount" x-cloak class="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white bg-red-500 border-2 border-white rounded-full dark:border-gray-800"></span>
+                        </button>
+
+                        <!-- Dropdown Panel -->
+                        <div x-show="open" x-cloak
+                            x-transition:enter="transition ease-out duration-100"
+                            x-transition:enter-start="transform opacity-0 scale-95"
+                            x-transition:enter-end="transform opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-75"
+                            x-transition:leave-start="transform opacity-100 scale-100"
+                            x-transition:leave-end="transform opacity-0 scale-95"
+                            class="absolute right-0 mt-2 w-72 sm:w-80 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 z-50">
+
+                            <div class="px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-200 border-b border-gray-100 dark:border-gray-700">
+                                Notifikasi
+                            </div>
+
+                            <div class="max-h-60 overflow-y-auto">
+                                <template x-for="notification in notifications" :key="notification.id">
+                                    <a href="#" class="block px-4 py-3 border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors" :class="{ 'bg-indigo-50/50 dark:bg-indigo-900/20': !notification.read }">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <p class="text-sm font-medium text-gray-900 dark:text-white" x-text="notification.title"></p>
+                                            <span class="text-[10px] text-gray-500 dark:text-gray-400 whitespace-nowrap ml-2" x-text="notification.time"></span>
+                                        </div>
+                                        <p class="text-xs text-gray-600 dark:text-gray-400 line-clamp-2" x-text="notification.description"></p>
+                                    </a>
+                                </template>
+
+                                <div x-show="notifications.length === 0" class="px-4 py-4 text-sm text-center text-gray-500 dark:text-gray-400">
+                                    Tidak ada notifikasi baru
+                                </div>
+                            </div>
+
+                            <div class="border-t border-gray-100 dark:border-gray-700">
+                                <a href="{{ auth()->user()->role === 'admin' ? route('settings.notification.admin') : route('settings.notification') }}"
+                                    class="block px-4 py-2 text-xs text-center text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium transition-colors">
+                                    Lihat Semua Notifikasi
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- User Dropdown -->
                     <div x-data="{ open: false }" class="relative">

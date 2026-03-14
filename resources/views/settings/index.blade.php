@@ -62,7 +62,7 @@
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Notifikasi</h3>
         </div>
         <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Kelola peringatan email dan notifikasi push.</p>
-        <a href="{{ route('settings.notification') }}"
+        <a href="{{ auth()->user()->role === 'admin' ? route('settings.notification.admin') : route('settings.notification') }}"
             class="text-sm font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 flex items-center gap-1">
             Kelola Notifikasi
             <!-- Icon Chevron Right -->
