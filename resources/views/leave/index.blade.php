@@ -8,38 +8,109 @@
 
     <!-- Form Pengajuan (Hanya untuk Employee) -->
     @if(auth()->user()->role === 'employee')
-    <div class="bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 rounded-xl p-6">
-        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Buat Pengajuan Baru</h3>
-        <form action="{{ route('leave.store') }}" method="POST" class="grid gap-6 md:grid-cols-2">
+
+    <div class="bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700 rounded-xl p-6">
+
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6">
+            Buat Pengajuan Baru
+        </h3>
+
+        <form action="{{ route('leave.store') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @csrf
-            <div class="col-span-2 sm:col-span-1">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jenis Izin</label>
-                <select name="type" required class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-indigo-500 focus:border-indigo-500">
+
+            <!-- Jenis Izin -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Jenis Izin
+                </label>
+
+                <select name="type" required
+                    class="w-full rounded-lg border border-gray-300 bg-gray-50
+                dark:bg-gray-700 dark:border-gray-600 dark:text-white
+                px-3 py-2
+                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                transition">
+
                     <option value="sick">Sakit</option>
                     <option value="leave">Cuti Tahunan</option>
                     <option value="permit">Izin Lainnya</option>
+
                 </select>
             </div>
 
-            <div class="col-span-2 sm:col-span-1">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mulai Tanggal</label>
-                <input type="date" name="start_date" required class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-indigo-500 focus:border-indigo-500">
+
+            <!-- Mulai Tanggal -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Mulai Tanggal
+                </label>
+
+                <input
+                    type="date"
+                    name="start_date"
+                    required
+                    class="w-full rounded-lg border border-gray-300 bg-gray-50
+                dark:bg-gray-700 dark:border-gray-600 dark:text-white
+                px-3 py-2
+                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                transition">
             </div>
 
-            <div class="col-span-2 sm:col-span-1">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sampai Tanggal</label>
-                <input type="date" name="end_date" required class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-indigo-500 focus:border-indigo-500">
+
+            <!-- Sampai Tanggal -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Sampai Tanggal
+                </label>
+
+                <input
+                    type="date"
+                    name="end_date"
+                    required
+                    class="w-full rounded-lg border border-gray-300 bg-gray-50
+                dark:bg-gray-700 dark:border-gray-600 dark:text-white
+                px-3 py-2
+                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                transition">
             </div>
 
-            <div class="col-span-2">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alasan</label>
-                <textarea name="reason" rows="3" required class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+
+            <!-- Alasan -->
+            <div class="md:col-span-2">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Alasan
+                </label>
+
+                <textarea
+                    name="reason"
+                    rows="4"
+                    required
+                    class="w-full rounded-lg border border-gray-300 bg-gray-50
+                dark:bg-gray-700 dark:border-gray-600 dark:text-white
+                px-3 py-2
+                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                transition"></textarea>
             </div>
 
-            <div class="col-span-2">
-                <button type="submit" class="w-full sm:w-auto px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">Kirim Pengajuan</button>
+
+            <!-- Submit Button -->
+            <div class="md:col-span-2 pt-2">
+                <button
+                    type="submit"
+                    class="inline-flex items-center justify-center
+                px-5 py-2.5
+                bg-indigo-600 text-white text-sm font-medium
+                rounded-lg
+                hover:bg-indigo-700
+                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
+                transition">
+
+                    Kirim Pengajuan
+                </button>
             </div>
+
         </form>
+
     </div>
     @endif
 
@@ -87,16 +158,18 @@
                             {{ $leave->status_label }}
                         </span>
                     </td>
-                    @if(auth()->user()->role === 'admin')
                     <td class="px-4 py-3">
                         <div class="flex gap-2">
 
+                            {{-- Accept / Decline hanya admin --}}
                             @if(auth()->user()->role === 'admin' && $leave->status === 'pending')
 
                             <!-- Accept -->
                             <form action="{{ route('leave.update', $leave->id) }}" method="POST">
-                                @csrf @method('PATCH')
+                                @csrf
+                                @method('PATCH')
                                 <input type="hidden" name="status" value="approved">
+
                                 <button
                                     type="submit"
                                     class="flex items-center justify-center h-6 w-14 text-xs font-medium text-white bg-green-600 rounded-md hover:bg-green-700 transition">
@@ -106,8 +179,10 @@
 
                             <!-- Decline -->
                             <form action="{{ route('leave.update', $leave->id) }}" method="POST">
-                                @csrf @method('PATCH')
+                                @csrf
+                                @method('PATCH')
                                 <input type="hidden" name="status" value="rejected">
+
                                 <button
                                     type="submit"
                                     class="flex items-center justify-center h-6 w-14 text-xs font-medium text-white bg-red-600 rounded-md hover:bg-red-700 transition">
@@ -117,15 +192,16 @@
 
                             @endif
 
-                            <!-- Detail -->
+
+                            <!-- Detail (SEMUA ROLE) -->
                             <button
-                                @click="selectedLeave = {{ json_encode($leave) }}; showModal = true"
+                                @click="selectedLeave = {{ json_encode(['type' => $leave->type, 'start_date' => $leave->start_date, 'end_date' => $leave->end_date, 'status' => $leave->status, 'status_label' => $leave->status_label, 'reason' => $leave->reason]) }}; showModal = true"
                                 class="flex items-center justify-center h-6 w-14 text-xs font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition">
                                 Detail
                             </button>
+
                         </div>
                     </td>
-                    @endif
                 </tr>
                 @empty
                 <tr>
@@ -175,10 +251,10 @@
                             <span
                                 class="px-3 py-1 text-xs font-semibold rounded-full"
                                 :class="{
-                    'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300': selectedLeave.status === 'approved',
-                    'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300': selectedLeave.status === 'pending',
-                    'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300': selectedLeave.status === 'rejected'}"
-                                x-text="selectedLeave.status.charAt(0).toUpperCase() + selectedLeave.status.slice(1)">
+                                    'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300': selectedLeave.status === 'approved',
+                                    'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300': selectedLeave.status === 'pending',
+                                    'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300': selectedLeave.status === 'rejected'}"
+                                x-text="selectedLeave.status_label">
                             </span>
 
                         </div>
@@ -197,7 +273,7 @@
                 <div class="mt-6 flex justify-end">
                     <button
                         @click="showModal=false"
-                        class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">
+                        class="px-4 py-1 bg-gray-600 text-sm text-white rounded-lg hover:bg-gray-700">
                         Tutup
                     </button>
                 </div>

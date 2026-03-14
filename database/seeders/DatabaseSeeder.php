@@ -47,7 +47,21 @@ class DatabaseSeeder extends Seeder
             'position' => 'Backend Developer',
             'status' => 'active',
         ]);
+        
+        $indira = User::create([
+            'name' => 'Indira',
+            'email' => 'indira@example.com',
+            'password' => Hash::make('indira123'), // password yang diketahui
+            'role' => 'employee',
+        ]);
 
+        Employee::create([
+            'user_id' => $indira->id,
+            'employee_id' => 'EMP-003',
+            'department' => 'IT',
+            'position' => 'UI UX Designer ',
+            'status' => 'active',
+        ]);
         User::factory(50)->create();
     }
 }

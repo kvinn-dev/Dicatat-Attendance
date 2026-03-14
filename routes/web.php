@@ -50,4 +50,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+    Route::get('/settings/system-setting', [SettingsController::class, 'system_setting'])->name('settings.system_setting');
+    Route::get('/settings/notification', [SettingsController::class, 'notiication'])->name('settings.notification');
 });
