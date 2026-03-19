@@ -26,7 +26,11 @@ class DashboardController extends Controller
         ->take(5)
         ->get();
 
-        return view('dashboard', compact('stats', 'recent_attendances'));
+        $workDaysStr = \App\Models\Setting::get('work_days', '["1","2","3","4","5"]');
+        $workDays = json_decode($workDaysStr, true) ?? ["1","2","3","4","5"];
+        $currentDay = (string) $today->dayOfWeek; // 0 = Minggu, 1 = Senin, dst.
+        $is_work_day = in_array($currentDay, $workDays);
 
+        return view('dashboard', compact('stats', 'recent_attendances', 'is_work_day'));
     }
 }

@@ -46,6 +46,35 @@
             </select>
             <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Pilih tema antarmuka aplikasi. Jika memilih "Ikuti Sistem", tampilan akan menyesuaikan pengaturan perangkat Anda.</p>
         </div>
+        
+        @if(auth()->user()->role === 'admin')
+        <div class="mt-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Jam Masuk</label>
+            <input type="time" name="work_start_time" value="{{ $settings['work_start_time'] ?? '09:00' }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+        </div>
+        
+        <div class="mt-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Jam Pulang</label>
+            <input type="time" name="work_end_time" value="{{ $settings['work_end_time'] ?? '17:00' }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+        </div>
+        
+        <div class="mt-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Pilih Hari Kerja</label>
+            <div class="mt-2 space-y-2">
+                @php
+                    $days = ['1' => 'Senin', '2' => 'Selasa', '3' => 'Rabu', '4' => 'Kamis', '5' => 'Jumat', '6' => 'Sabtu', '0' => 'Minggu'];
+                @endphp
+                @foreach($days as $value => $label)
+                    <label class="inline-flex items-center mr-4">
+                        <input type="checkbox" name="work_days[]" value="{{ $value }}" 
+                            {{ in_array($value, $settings['work_days'] ?? []) ? 'checked' : '' }}
+                            class="rounded border-gray-300 text-indigo-600 shadow-sm">
+                        <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ $label }}</span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+        @endif
 
         <div class="pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-end">
             <button type="submit" class="inline-flex items-center justify-center px-5 py-2.5 bg-indigo-600 border border-transparent rounded-lg font-medium text-sm text-white hover:bg-indigo-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all duration-200 transform hover:-translate-y-0.5">

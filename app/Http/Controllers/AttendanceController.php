@@ -21,6 +21,13 @@ class AttendanceController extends Controller
         $today = Carbon::today()->toDateString();
         $now = Carbon::now();
 
+        // Pengecekan status hari kerja
+        $workDaysStr = \App\Models\Setting::get('work_days', '["1","2","3","4","5"]');
+        $workDays = json_decode($workDaysStr, true) ?? ["1","2","3","4","5"];
+        if (!in_array((string) $now->dayOfWeek, $workDays)) {
+            return back()->with('error', 'Hari ini bukan hari kerja. Tidak dapat melakukan Check In.');
+        }
+
         $existing = Attendance::where('employee_id', $employee->id)
             ->where('date', $today)
             ->first();
@@ -29,8 +36,11 @@ class AttendanceController extends Controller
             return back()->with('error', 'You have already checked in today');
         }
 
-        $startTime = Carbon::createFromTime(9, 0, 0);
-        $status = $now->gt($startTime) ? 'late' : 'present';
+        $startTimeStr = \App\Models\Setting::get('work_start_time', '09:00');
+        $startTime = Carbon::parse($startTimeStr);
+        
+        // Status telat jika jam check-in lebih dari 1 jam dari jadwal masuk
+        $status = $now->gt($startTime->copy()->addHour()) ? 'late' : 'present';
 
         Attendance::create([
             'employee_id' => $employee->id,
@@ -51,6 +61,13 @@ class AttendanceController extends Controller
 
         $employee = $user->employee;
         $today = Carbon::today()->toDateString();
+
+        // Pengecekan status hari kerja saat checkout (opsional, sebagai pengamanan API)
+        $workDaysStr = \App\Models\Setting::get('work_days', '["1","2","3","4","5"]');
+        $workDays = json_decode($workDaysStr, true) ?? ["1","2","3","4","5"];
+        if (!in_array((string) Carbon::now()->dayOfWeek, $workDays)) {
+            return back()->with('error', 'Hari ini bukan hari kerja. Tidak dapat melakukan Check Out.');
+        }
 
         $attendance = Attendance::where('employee_id', $employee->id)
             ->where('date', $today)
