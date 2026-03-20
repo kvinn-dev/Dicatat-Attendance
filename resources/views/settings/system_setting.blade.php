@@ -10,78 +10,137 @@
         </svg>
         <span class="text-gray-900 dark:text-gray-100 font-medium">Sistem</span>
     </div>
-    
+
     <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Pengaturan Sistem</h2>
 </div>
 
-<div class="bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 rounded-xl p-6 max-w-2xl">
-    
+<div class="bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 rounded-xl p-6 md:p-8 max-w-4xl">
+
     <!-- Alert Success -->
     @if(session('success'))
     <div class="mb-6 rounded-lg bg-green-50 dark:bg-green-900/30 p-4 text-sm text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800 flex items-center">
-        <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
         <span class="font-medium">{{ session('success') }}</span>
     </div>
     @endif
 
     <form action="{{ route('settings.system_setting.update') }}" method="POST" class="space-y-6">
         @csrf
-        
-        <!-- Pilihan Bahasa -->
-        <div>
-            <label for="language" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Bahasa (Language)</label>
-            <select id="language" name="language" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-4 py-2.5 transition-colors">
-                <option value="id">Bahasa Indonesia</option>
-                <option value="en">English</option>
-            </select>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Pilihan Bahasa -->
+            <div>
+                <label for="language" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Bahasa Sistem</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                        </svg>
+                    </div>
+                    <select id="language" name="language" class="block w-full pl-10 appearance-none rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-4 py-2.5 transition-colors">
+                        <option value="id">Bahasa Indonesia</option>
+                        <option value="en">English</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pilihan Tema -->
+            <div>
+                <label for="theme" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tema Tampilan</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </div>
+                    <select id="theme" name="theme" class="block w-full pl-10 appearance-none rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-4 py-2.5 transition-colors">
+                        <option value="light">Mode Terang</option>
+                        <option value="dark">Mode Gelap</option>
+                        <option value="system">Ikuti Sistem (Default)</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Pilihan Tema -->
-        <div>
-            <label for="theme" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tema Tampilan (Theme)</label>
-            <select id="theme" name="theme" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-4 py-2.5 transition-colors">
-                <option value="light">Mode Terang (Light)</option>
-                <option value="dark">Mode Gelap (Dark)</option>
-                <option value="system">Ikuti Sistem (System Default)</option>
-            </select>
-            <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Pilih tema antarmuka aplikasi. Jika memilih "Ikuti Sistem", tampilan akan menyesuaikan pengaturan perangkat Anda.</p>
-        </div>
-        
         @if(auth()->user()->role === 'admin')
-        <div class="mt-4">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Jam Masuk</label>
-            <input type="time" name="work_start_time" value="{{ $settings['work_start_time'] ?? '09:00' }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-        </div>
-        
-        <div class="mt-4">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Jam Pulang</label>
-            <input type="time" name="work_end_time" value="{{ $settings['work_end_time'] ?? '17:00' }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-        </div>
-        
-        <div class="mt-4">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Pilih Hari Kerja</label>
-            <div class="mt-2 space-y-2">
-                @php
+        <div class="pt-6 mt-6 border-t border-gray-200 dark:border-gray-700">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-5">Pengaturan Jadwal Kerja</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Jam Masuk</label>
+                    <input type="time" name="work_start_time" value="{{ $settings['work_start_time'] ?? '09:00' }}" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-4 py-2.5 transition-colors">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Jam Pulang</label>
+                    <input type="time" name="work_end_time" value="{{ $settings['work_end_time'] ?? '17:00' }}" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-4 py-2.5 transition-colors">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Hari Kerja Efektif</label>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                    @php
                     $days = ['1' => 'Senin', '2' => 'Selasa', '3' => 'Rabu', '4' => 'Kamis', '5' => 'Jumat', '6' => 'Sabtu', '0' => 'Minggu'];
-                @endphp
-                @foreach($days as $value => $label)
-                    <label class="inline-flex items-center mr-4">
-                        <input type="checkbox" name="work_days[]" value="{{ $value }}" 
+                    @endphp
+                    @foreach($days as $value => $label)
+                    <label class="relative flex items-center p-3 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-700/80 cursor-pointer transition-all duration-200 group">
+                        <input type="checkbox" name="work_days[]" value="{{ $value }}"
                             {{ in_array($value, $settings['work_days'] ?? []) ? 'checked' : '' }}
-                            class="rounded border-gray-300 text-indigo-600 shadow-sm">
-                        <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ $label }}</span>
+                            class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 transition">
+                        <span class="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition-colors">{{ $label }}</span>
                     </label>
-                @endforeach
+                    @endforeach
+                </div>
+                <p class="mt-3 text-xs text-gray-500 dark:text-gray-400">Centang hari di mana karyawan diwajibkan untuk melakukan absensi (Check In & Check Out).</p>
             </div>
         </div>
         @endif
 
-        <div class="pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-end">
+        <div class="pt-6 mt-2 border-t border-gray-100 dark:border-gray-700 flex justify-end">
             <button type="submit" class="inline-flex items-center justify-center px-5 py-2.5 bg-indigo-600 border border-transparent rounded-lg font-medium text-sm text-white hover:bg-indigo-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all duration-200 transform hover:-translate-y-0.5">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" /></svg>
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                </svg>
                 Simpan Pengaturan
             </button>
         </div>
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeSelect = document.getElementById('theme');
+        
+        // 1. Inisialisasi dropdown dari localStorage saat halaman dimuat
+        const currentTheme = localStorage.getItem('theme') || 'system';
+        if (themeSelect) {
+            themeSelect.value = currentTheme;
+        }
+        
+        // 2. Tangani perubahan saat user memilih tema dari dropdown
+        if (themeSelect) {
+            themeSelect.addEventListener('change', function(e) {
+                const selectedTheme = e.target.value;
+                localStorage.setItem('theme', selectedTheme); // Simpan ke browser
+                
+                // Trigger event global agar Alpine.js memperbarui tampilan
+                window.dispatchEvent(new CustomEvent('theme-changed', { detail: selectedTheme }));
+            });
+        }
+    });
+</script>
 @endsection

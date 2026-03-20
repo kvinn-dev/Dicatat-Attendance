@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
     x-data="{
-          darkMode: localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches),
           sidebarOpen: false,
-          toggleTheme() {
-              this.darkMode = !this.darkMode;
-              localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
-              if (this.darkMode) {
+          theme: localStorage.getItem('theme') || 'system',
+          initTheme() {
+              const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+              if (this.theme === 'dark' || (this.theme === 'system' && isSystemDark)) {
                   document.documentElement.classList.add('dark');
               } else {
                   document.documentElement.classList.remove('dark');
               }
           }
       }"
-    x-init="$watch('darkMode', val => val ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')); if(darkMode) document.documentElement.classList.add('dark');"
-    :class="{ 'dark': darkMode }">
+    x-init="initTheme(); window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { if (theme === 'system') initTheme(); });"
+    @theme-changed.window="theme = $event.detail; initTheme()">
 
 <head>
     <meta charset="utf-8">
@@ -38,6 +37,14 @@
             font-family: 'Inter', sans-serif;
         }
     </style>
+    <script>
+        // Mencegah FOUC (layar berkedip) saat memuat tema gelap
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (savedTheme === 'system' && systemPrefersDark)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
 </head>
 
 <body class="font-sans antialiased bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
