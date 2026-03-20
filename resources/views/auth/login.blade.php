@@ -74,7 +74,7 @@
                     <div>
                         <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
                         <input type="email" name="email"
-                            class="mt-1 w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                            class="mt-1 w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50 placeholder-gray-400 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                             placeholder="Masukkan Email">
                     </div>
 
@@ -82,7 +82,7 @@
                     <div>
                         <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Kata Sandi</label>
                         <input type="password" name="password"
-                            class="mt-1 w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                            class="mt-1 w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50 placeholder-gray-400 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                             placeholder="Masukkan Kata Sandi">
                     </div>
 
