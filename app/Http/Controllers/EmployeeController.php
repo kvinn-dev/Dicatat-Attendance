@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -39,40 +40,55 @@ class EmployeeController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'department' => 'nullable|string|max:255',
             'position' => 'nullable|string|max:255',
+        ], [
+            'name.required' => 'Nama wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah digunakan, silakan gunakan email lain.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal 8 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
         ]);
 
-        // buat User dengan role employee
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'role' => 'employee',
-            'password' => bcrypt($request->password), // password dari input admin
-        ]);
+        try {
+            DB::beginTransaction(); // Mulai transaksi DB
 
-        $lastEmployee = Employee::latest('id')->first();
+            // buat User dengan role employee
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'role' => 'employee',
+                'password' => bcrypt($request->password), // password dari input admin
+            ]);
 
-        $nextNumber = $lastEmployee
-            ? ((int) substr($lastEmployee->employee_id, 4)) + 1
-            : 1;
+            $lastEmployee = Employee::latest('id')->first();
 
-        $employeeId = 'EMP-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+            $nextNumber = $lastEmployee
+                ? ((int) substr($lastEmployee->employee_id, 4)) + 1
+                : 1;
 
-        $user->employee()->create([
-            'employee_id' => $employeeId,
-            'department' => $request->department,
-            'position' => $request->position,
-            'status' => 'active',
-            'email_verified_at' => date ('now'),
-        ]);
+            $employeeId = 'EMP-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 
-        // Kirim notifikasi peringatan ganti password ke karyawan baru
-        \App\Models\Notification::create([
-            'user_id' => $user->id,
-            'title' => 'Peringatan Keamanan',
-            'content' => 'Selamat datang! Admin telah membuatkan akun untuk Anda. Demi keamanan, mohon segera ubah kata sandi Anda di menu Pengaturan Profil.',
-        ]);
+            $user->employee()->create([
+                'employee_id' => $employeeId,
+                'department' => $request->department,
+                'position' => $request->position,
+                'status' => 'active',
+            ]);
 
-        return redirect()->route('employees.index')->with('success', 'Karyawan berhasil ditambahkan.');
+            // Kirim notifikasi peringatan ganti password ke karyawan baru
+            \App\Models\Notification::create([
+                'user_id' => $user->id,
+                'title' => 'Peringatan Keamanan',
+                'content' => 'Selamat datang! Admin telah membuatkan akun untuk Anda. Demi keamanan, mohon segera ubah kata sandi Anda di menu Pengaturan Profil.',
+            ]);
+
+            DB::commit(); // Simpan permanen jika semua operasi sukses
+            return redirect()->route('employees.index')->with('success', 'Karyawan berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            DB::rollBack(); // Batalkan semua insert jika ada yang error
+            return back()->withInput()->with('error', 'Terjadi kesalahan sistem, karyawan gagal ditambahkan.');
+        }
     }
 
     public function edit($id)

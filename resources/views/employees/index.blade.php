@@ -1,6 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Alert Popup (Sukses) -->
+@if(session('success'))
+<div x-data="{ show: true }" x-show="show" x-cloak
+    class="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+    <div @click.away="show = false"
+        class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-sm w-full p-6 text-center transform transition-all"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95">
+
+        <div class="mx-auto flex items-center justify-center h-14 w-14 rounded-full bg-green-100 dark:bg-green-900/40 mb-4">
+            <svg class="h-7 w-7 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Berhasil!</h3>
+        
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">
+            {{ session('success') }}
+        </p>
+
+        <button @click="show = false"
+            class="w-full inline-flex justify-center px-4 py-2.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-sm font-medium rounded-xl transition-colors">
+            Lanjut
+        </button>
+    </div>
+</div>
+@endif
 
 <div class="space-y-6" x-data="{ showDeleteModal: false, selectedEmployee: null }">
 

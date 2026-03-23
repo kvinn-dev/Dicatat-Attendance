@@ -86,7 +86,7 @@
                         </button>
 
                         @if (session('success') === 'Kata sandi berhasil diperbarui.')
-                            <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-green-600 dark:text-green-400 font-medium">Tersimpan.</p>
+                            <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)" class="text-sm text-green-600 dark:text-green-400 font-medium">Tersimpan.</p>
                         @endif
                     </div>
                 </form>
