@@ -121,7 +121,7 @@
         </div>
 
         <!-- Pagination -->
-        <div class="bg-white dark:bg-gray-800 px-4 py-3 border-t border-gray-200 dark:border-gray-700 sm:px-6">
+        <div class="bg-white dark:bg-gray-800 [&_a:hover]:bg-gray-600 px-4 py-3 border-t border-gray-200 dark:border-gray-700 sm:px-6">
             {{ $employees->links() }}
         </div>
 

@@ -73,6 +73,7 @@ class EmployeeController extends Controller
             'email' => 'required|email|unique:users,email,' . $employee->user->id,
             'department' => 'nullable|string|max:255',
             'position' => 'nullable|string|max:255',
+            'status' => 'required|in:active,inactive',
         ]);
 
         // update User
@@ -85,6 +86,7 @@ class EmployeeController extends Controller
         $employee->update([
             'department' => $request->department,
             'position' => $request->position,
+            'status' => $request->status,
         ]);
 
         return redirect()->route('employees.index')->with('success', 'Data karyawan berhasil diperbarui.');
