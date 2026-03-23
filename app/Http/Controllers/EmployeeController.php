@@ -36,6 +36,7 @@ class EmployeeController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
             'department' => 'nullable|string|max:255',
             'position' => 'nullable|string|max:255',
         ]);
@@ -45,14 +46,30 @@ class EmployeeController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'role' => 'employee',
-            'password' => bcrypt('password123'), // default password
+            'password' => bcrypt($request->password), // password dari input admin
         ]);
 
-        // buat Employee terkait
+        $lastEmployee = Employee::latest('id')->first();
+
+        $nextNumber = $lastEmployee
+            ? ((int) substr($lastEmployee->employee_id, 4)) + 1
+            : 1;
+
+        $employeeId = 'EMP-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+
         $user->employee()->create([
+            'employee_id' => $employeeId,
             'department' => $request->department,
             'position' => $request->position,
             'status' => 'active',
+            'email_verified_at' => date ('now'),
+        ]);
+
+        // Kirim notifikasi peringatan ganti password ke karyawan baru
+        \App\Models\Notification::create([
+            'user_id' => $user->id,
+            'title' => 'Peringatan Keamanan',
+            'content' => 'Selamat datang! Admin telah membuatkan akun untuk Anda. Demi keamanan, mohon segera ubah kata sandi Anda di menu Pengaturan Profil.',
         ]);
 
         return redirect()->route('employees.index')->with('success', 'Karyawan berhasil ditambahkan.');

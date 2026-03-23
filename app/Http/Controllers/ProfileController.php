@@ -28,13 +28,12 @@ class ProfileController extends Controller
         
         $user->update($request->only('name', 'email'));
 
-        return back()->with('success', 'Profile updated successfully.');
+        return back()->with('success', 'Profil berhasil diperbarui.');
     }
 
     public function password(Request $request)
     {
         $request->validate([
-            'current_password' => ['required', 'current_password'],
             'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
@@ -45,6 +44,6 @@ class ProfileController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return back()->with('success', 'Password updated successfully.');
+        return back()->with('success', 'Kata sandi berhasil diperbarui.');
     }
 }
