@@ -204,10 +204,17 @@
                                 </div>
                             </div>
 
-                            <div class="border-t border-gray-100 dark:border-gray-700">
+                            <div class="border-t border-gray-100 dark:border-gray-700 flex divide-x divide-gray-100 dark:divide-gray-700">
+                                <form action="{{ route('settings.notification.read_all') }}" method="POST" class="w-1/2">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="w-full h-full block px-4 py-2 text-xs text-center text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-gray-200 font-medium transition-colors rounded-bl-md">
+                                        Tandai Semua Dibaca
+                                    </button>
+                                </form>
                                 <a href="{{ auth()->user()->role === 'admin' ? route('settings.notification.admin') : route('settings.notification') }}"
-                                    class="block px-4 py-2 text-xs text-center text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium transition-colors">
-                                    Lihat Semua Notifikasi
+                                    class="w-1/2 flex items-center justify-center px-4 py-2 text-xs text-center text-indigo-600 dark:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium transition-colors rounded-br-md">
+                                    Lihat Semua
                                 </a>
                             </div>
                         </div>

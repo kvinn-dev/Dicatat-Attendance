@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/employees', EmployeeController::class);
         Route::get('/attendances-index', [AttendanceController::class, 'index'])->name('attendances.index');
         Route::patch('/leave/{id}', [LeaveController::class, 'update'])->name('leave.update');
-        
+
         // Notifikasi untuk Admin
         Route::get('/settings/notification/admin', [SettingsController::class, 'notificationAdmin'])->name('settings.notification.admin');
         Route::post('/settings/notification/admin', [SettingsController::class, 'storeNotification'])->name('settings.notification.store');
@@ -51,10 +51,11 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['auth'])->group(function () {
         Route::get('/leave', [LeaveController::class, 'index'])->name('leave.index');
         Route::post('/leave', [LeaveController::class, 'store'])->name('leave.store');
-        
+
         // Notifikasi untuk Karyawan
         Route::get('/settings/notification', [SettingsController::class, 'notificationEmployee'])->name('settings.notification');
         Route::patch('/settings/notification/{id}/read', [SettingsController::class, 'markAsRead'])->name('settings.notification.read');
+        Route::patch('/settings/notification/read-all', [SettingsController::class, 'markAllAsRead'])->name('settings.notification.read_all');
     });
 
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');

@@ -104,4 +104,15 @@ class SettingsController extends Controller
         $notification->update(['read_at' => now()]);
         return back()->with('success', 'Notifikasi ditandai telah dibaca.');
     }
+
+    public function markAllAsRead()
+    {
+        $user = Auth::user();
+        Notification::where(function($query) use ($user) {
+            $query->where('user_id', $user->id)
+                  ->orWhereNull('user_id');
+        })->whereNull('read_at')->update(['read_at' => now()]);
+        
+        return back()->with('success', 'Semua notifikasi ditandai telah dibaca.');
+    }
 }
