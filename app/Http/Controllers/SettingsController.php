@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
@@ -34,13 +35,25 @@ class SettingsController extends Controller
             'work_days' => 'nullable|array',
         ]);
 
+        // Simpan preferensi bahasa dan tema di session agar bersifat personal per-user
+        if ($request->has('language')) {
+            session(['language' => $request->language]);
+        }
+        
+        if ($request->has('theme')) {
+            session(['theme' => $request->theme]);
+        }
+
         // Hanya Admin yang dapat menyimpan pengaturan jadwal kerja
         if (auth()->user()->role === 'admin') {
-            if ($request->has('work_start_time')) \App\Models\Setting::set('work_start_time', $request->work_start_time);
-            if ($request->has('work_end_time')) \App\Models\Setting::set('work_end_time', $request->work_end_time);
+            if ($request->has('work_start_time')) Setting::set('work_start_time', $request->work_start_time);
+            if ($request->has('work_end_time')) Setting::set('work_end_time', $request->work_end_time);
             if ($request->has('work_days')) {
                 // Simpan hari dalam format JSON
-                \App\Models\Setting::set('work_days', json_encode($request->work_days));
+                Setting::set('work_days', json_encode($request->work_days));
+            }
+            if ($request->has('language')) {
+                Setting::set('language', $request->language);
             }
         }
 

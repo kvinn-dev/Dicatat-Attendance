@@ -3,7 +3,7 @@
 @section('content')
 <div class="space-y-6" x-data="{ showModal: false, selectedLeave: null }">
     <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Pengajuan Cuti</h2>
+        <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ __('leaves.title') }}</h2>
     </div>
 
     <!-- Form Pengajuan (Hanya untuk Employee) -->
@@ -12,7 +12,7 @@
     <div class="bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700 rounded-xl p-6">
 
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-            Buat Pengajuan Baru
+            {{ __('leaves.create_new') }}
         </h3>
 
         <form action="{{ route('leave.store') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -21,7 +21,7 @@
             <!-- Jenis Izin -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Jenis Izin
+                    {{ __('leaves.leave_type') }}
                 </label>
 
                 <select name="type" required
@@ -31,9 +31,9 @@
                 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
                 transition">
 
-                    <option value="sick">Sakit</option>
-                    <option value="leave">Cuti Tahunan</option>
-                    <option value="permit">Izin Lainnya</option>
+                    <option value="sick">{{ __('leaves.type_sick') }}</option>
+                    <option value="leave">{{ __('leaves.type_leave') }}</option>
+                    <option value="permit">{{ __('leaves.type_permit') }}</option>
 
                 </select>
             </div>
@@ -42,7 +42,7 @@
             <!-- Mulai Tanggal -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Mulai Tanggal
+                    {{ __('leaves.start_date') }}
                 </label>
 
                 <input
@@ -60,7 +60,7 @@
             <!-- Sampai Tanggal -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Sampai Tanggal
+                    {{ __('leaves.end_date') }}
                 </label>
 
                 <input
@@ -78,7 +78,7 @@
             <!-- Alasan -->
             <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Alasan
+                    {{ __('leaves.reason') }}
                 </label>
 
                 <textarea
@@ -105,7 +105,7 @@
                 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
                 transition">
 
-                    Kirim Pengajuan
+                    {{ __('leaves.submit_button') }}
                 </button>
             </div>
 
@@ -127,13 +127,13 @@
             <thead class="bg-gray-50 dark:bg-gray-700/50">
                 <tr>
                     @if(auth()->user()->role === 'admin')
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Karyawan</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">{{ __('leaves.table_employee') }}</th>
                     @endif
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Jenis</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Tanggal</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Alasan</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Status</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Aksi</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">{{ __('leaves.table_type') }}</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">{{ __('leaves.table_date') }}</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">{{ __('leaves.table_reason') }}</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">{{ __('leaves.table_status') }}</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">{{ __('leaves.table_actions') }}</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
@@ -145,7 +145,7 @@
                         <div class="text-xs text-gray-500">{{ $leave->employee->employee_id ?? '' }}</div>
                     </td>
                     @endif
-                    <td class="px-4 py-3 text-gray-700 dark:text-gray-300 capitalize">{{ $leave->type }}</td>
+                    <td class="px-4 py-3 text-gray-700 dark:text-gray-300">{{ __('leaves.type_' . $leave->type) }}</td>
                     <td class="px-4 py-3 text-gray-700 dark:text-gray-300">
                         {{ \Carbon\Carbon::parse($leave->start_date)->format('d M') }} - {{ \Carbon\Carbon::parse($leave->end_date)->format('d M Y') }}
                     </td>
@@ -155,7 +155,7 @@
                             {{ $leave->status === 'approved' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' : '' }}
                             {{ $leave->status === 'pending' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300' : '' }}
                             {{ $leave->status === 'rejected' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300' : '' }}">
-                            {{ $leave->status_label }}
+                            {{ __('leaves.status_' . $leave->status) }}
                         </span>
                     </td>
                     <td class="px-4 py-3">
@@ -173,7 +173,7 @@
                                 <button
                                     type="submit"
                                     class="flex items-center justify-center h-6 w-14 text-xs font-medium text-white bg-green-600 rounded-md hover:bg-green-700 transition">
-                                    Accept
+                                    {{ __('leaves.action_accept') }}
                                 </button>
                             </form>
 
@@ -186,7 +186,7 @@
                                 <button
                                     type="submit"
                                     class="flex items-center justify-center h-6 w-14 text-xs font-medium text-white bg-red-600 rounded-md hover:bg-red-700 transition">
-                                    Decline
+                                    {{ __('leaves.action_decline') }}
                                 </button>
                             </form>
 
@@ -195,9 +195,9 @@
 
                             <!-- Detail (SEMUA ROLE) -->
                             <button
-                                @click="selectedLeave = {{ json_encode(['type' => $leave->type, 'start_date' => $leave->start_date, 'end_date' => $leave->end_date, 'status' => $leave->status, 'status_label' => $leave->status_label, 'reason' => $leave->reason]) }}; showModal = true"
+                                @click="selectedLeave = {{ json_encode(['type_label' => __('leaves.type_' . $leave->type), 'period' => \Carbon\Carbon::parse($leave->start_date)->format('d M Y') . ' - ' . \Carbon\Carbon::parse($leave->end_date)->format('d M Y'), 'status' => $leave->status, 'status_label' => __('leaves.status_' . $leave->status), 'reason' => $leave->reason]) }}; showModal = true"
                                 class="flex items-center justify-center h-6 w-14 text-xs font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition">
-                                Detail
+                                {{ __('leaves.action_detail') }}
                             </button>
 
                         </div>
@@ -205,7 +205,9 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="{{ auth()->user()->role === 'admin' ? '6' : '4' }}" class="px-4 py-4 text-center text-gray-500">Belum ada data pengajuan cuti.</td>
+                    <td colspan="{{ auth()->user()->role === 'admin' ? '6' : '4' }}" class="py-4 text-center text-gray-500">
+                        {{ __('leaves.no_data') }}
+                    </td>
                 </tr>
                 @endforelse
             </tbody>
@@ -218,7 +220,7 @@
             <div class="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md shadow-lg">
 
                 <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
-                    Detail Pengajuan Cuti
+                    {{ __('leaves.modal_title') }}
                 </h3>
 
                 <template x-if="selectedLeave">
@@ -226,27 +228,21 @@
 
                         <!-- Jenis -->
                         <div class="flex justify-between items-start border-b pb-2 border-gray-200 dark:border-gray-700">
-                            <span class="text-gray-500 dark:text-gray-400">Jenis Izin</span>
-                            <span class="font-medium text-gray-900 dark:text-white capitalize"
-                                x-text="selectedLeave.type === 'leave' ? 'Cuti Tahunan' :
-                        selectedLeave.type === 'sick' ? 'Sakit' :
-                        'Izin Lainnya'">
+                            <span class="text-gray-500 dark:text-gray-400">{{ __('leaves.leave_type') }}</span>
+                            <span class="font-medium text-gray-900 dark:text-white" x-text="selectedLeave.type_label">
                             </span>
                         </div>
 
                         <!-- Periode -->
                         <div class="flex justify-between items-start border-b pb-2 border-gray-200 dark:border-gray-700">
-                            <span class="text-gray-500 dark:text-gray-400">Periode</span>
-                            <span class="font-medium text-gray-900 dark:text-white">
-                                <span x-text="selectedLeave.start_date"></span>
-                                -
-                                <span x-text="selectedLeave.end_date"></span>
+                            <span class="text-gray-500 dark:text-gray-400">{{ __('leaves.modal_period') }}</span>
+                            <span class="font-medium text-gray-900 dark:text-white" x-text="selectedLeave.period">
                             </span>
                         </div>
 
                         <!-- Status -->
                         <div class="flex justify-between items-center border-b pb-2 border-gray-200 dark:border-gray-700">
-                            <span class="text-gray-500 dark:text-gray-400">Status</span>
+                            <span class="text-gray-500 dark:text-gray-400">{{ __('leaves.table_status') }}</span>
 
                             <span
                                 class="px-3 py-1 text-xs font-semibold rounded-full"
@@ -261,7 +257,7 @@
 
                         <!-- Alasan -->
                         <div>
-                            <span class="text-gray-500 dark:text-gray-400 block mb-2">Alasan</span>
+                            <span class="text-gray-500 dark:text-gray-400 block mb-2">{{ __('leaves.reason') }}</span>
                             <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-200 leading-relaxed">
                                 <p x-text="selectedLeave.reason"></p>
                             </div>
@@ -274,7 +270,7 @@
                     <button
                         @click="showModal=false"
                         class="px-4 py-1 bg-gray-600 text-sm text-white rounded-lg hover:bg-gray-700">
-                        Tutup
+                        {{ __('leaves.modal_close') }}
                     </button>
                 </div>
 

@@ -4,7 +4,7 @@
 
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
-            <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Selamat Datang, {{ auth()->user()->name }}!</h2>
+            <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ __('dashboard.welcome', ['name' => auth()->user()->name]) }}</h2>
             <!-- <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Here's what's happening with your workforce today.</p> -->
         </div>
 
@@ -13,21 +13,21 @@
                 @if(isset($is_work_day) && !$is_work_day)
                     <div class="inline-flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 px-4 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
                         <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                        Bukan Hari Kerja
+                        {{ __('dashboard.not_work_day') }}
                     </div>
                 @else
                     <form action="{{ route('attendance.checkIn') }}" method="POST">
                         @csrf
                         <button type="submit" class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
                             <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" /></svg>
-                            Check In
+                            {{ __('dashboard.check_in') }}
                         </button>
                     </form>
                     <form action="{{ route('attendance.checkOut') }}" method="POST">
                         @csrf
                         <button type="submit" class="inline-flex items-center justify-center rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
                             <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
-                            Check Out
+                            {{ __('dashboard.check_out') }}
                         </button>
                     </form>
                 @endif
@@ -60,7 +60,7 @@
         <div class="rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Karyawan</p>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('dashboard.total_employees') }}</p>
                     <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $stats['total_employees'] }}</p>
                 </div>
                 <div class="p-3 bg-indigo-50 dark:bg-indigo-900/50 rounded-lg text-indigo-600 dark:text-indigo-400">
@@ -73,7 +73,7 @@
         <div class="rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Hadir Hari Ini</p>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('dashboard.present_today') }}</p>
                     <p class="text-3xl font-bold text-green-600 dark:text-green-400 mt-2">{{ $stats['present_today'] }}</p>
                 </div>
                 <div class="p-3 bg-green-50 dark:bg-green-900/50 rounded-lg text-green-600 dark:text-green-400">
@@ -86,7 +86,7 @@
         <div class="rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Telat Hari Ini</p>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('dashboard.late_today') }}</p>
                     <p class="text-3xl font-bold text-yellow-600 dark:text-yellow-400 mt-2">{{ $stats['late_today'] }}</p>
                 </div>
                 <div class="p-3 bg-yellow-50 dark:bg-yellow-900/50 rounded-lg text-yellow-600 dark:text-yellow-400">
@@ -99,7 +99,7 @@
         <div class="rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Tidak Hadir Hari Ini</p>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('dashboard.absent_today') }}</p>
                     <p class="text-3xl font-bold text-red-600 dark:text-red-400 mt-2">{{ $stats['absent_today'] }}</p>
                 </div>
                 <div class="p-3 bg-red-50 dark:bg-red-900/50 rounded-lg text-red-600 dark:text-red-400">
@@ -112,16 +112,16 @@
     <!-- Recent Activity -->
     <div class="rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
         <div class="p-6 border-b border-gray-100 dark:border-gray-700">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Aktivitas Kehadiran Terbaru</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ __('dashboard.recent_activity') }}</h3>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm text-left">
                 <thead class="text-xs text-gray-500 uppercase bg-gray-50 dark:bg-gray-700/50 dark:text-gray-400">
                     <tr>
-                        <th class="px-6 py-4 font-medium">Nama Karyawan</th>
-                        <th class="px-6 py-4 font-medium">Status</th>
-                        <th class="px-6 py-4 font-medium">Check In</th>
-                        <th class="px-6 py-4 font-medium">Check Out</th>
+                        <th class="px-6 py-4 font-medium">{{ __('dashboard.employee_name') }}</th>
+                        <th class="px-6 py-4 font-medium">{{ __('dashboard.status') }}</th>
+                        <th class="px-6 py-4 font-medium">{{ __('dashboard.check_in_time') }}</th>
+                        <th class="px-6 py-4 font-medium">{{ __('dashboard.check_out_time') }}</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
@@ -141,7 +141,7 @@
                             {{ $attendance->status === 'late' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300' : '' }}
                             {{ $attendance->status === 'absent' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300' : '' }}
                         ">
-                            {{ ucfirst($attendance->status) }}
+                            {{ __('dashboard.status_' . $attendance->status) }}
                         </span>
                     </td>
                     <td class="px-6 py-4 text-gray-500 dark:text-gray-400">{{ \Carbon\Carbon::parse($attendance->check_in)->format('H:i A') }}</td>
