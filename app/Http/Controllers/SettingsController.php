@@ -6,6 +6,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 
 
 class SettingsController extends Controller
@@ -18,9 +19,11 @@ class SettingsController extends Controller
     public function system_setting()
     {
         $settings = [
-            'work_start_time' => \App\Models\Setting::get('work_start_time', '09:00'),
-            'work_end_time' => \App\Models\Setting::get('work_end_time', '17:00'),
-            'work_days' => json_decode(\App\Models\Setting::get('work_days', '["1","2","3","4","5"]'), true) ?? [],
+            'work_start_time' => Setting::get('work_start_time', '09:00'),
+            'work_end_time' => Setting::get('work_end_time', '17:00'),
+            'work_days' => json_decode(Setting::get('work_days', '["1","2","3","4","5"]'), true) ?? [],
+            'language' => session('language', Setting::get('language', App::getLocale())),
+            'theme' => session('theme', 'system'),
         ];
         return view('settings.system_setting', compact('settings'));
     }

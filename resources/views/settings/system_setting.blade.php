@@ -40,8 +40,8 @@
                         </svg>
                     </div>
                     <select id="language" name="language" class="block w-full pl-10 appearance-none rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-4 py-2.5 transition-colors">
-                        <option value="id">Bahasa Indonesia</option>
-                        <option value="en">English</option>
+                        <option value="id" {{ ($settings['language'] ?? 'id') == 'id' ? 'selected' : '' }}>Bahasa Indonesia</option>
+                        <option value="en" {{ ($settings['language'] ?? 'id') == 'en' ? 'selected' : '' }}>English</option>
                     </select>
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                         <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
