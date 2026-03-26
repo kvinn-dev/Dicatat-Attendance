@@ -5,14 +5,14 @@
     <div>
         <!-- Breadcrumb -->
         <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3">
-            <a href="{{ route('settings.index') }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Pengaturan</a>
+            <a href="{{ route('settings.index') }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{{ __('settings/notification.breadcrumb-before') }}</a>
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
-            <span class="text-gray-900 dark:text-gray-100 font-medium">Notifikasi</span>
+            <span class="text-gray-900 dark:text-gray-100 font-medium">{{ __('settings/notification.breadcrumb-now') }}</span>
         </div>
         
-        <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Notifikasi Anda</h2>
+        <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ __('settings/notification.title-employee') }}</h2>
     </div>
 </div>
 
@@ -50,7 +50,7 @@
                         <h4 class="text-sm font-semibold truncate {{ $is_unread ? 'text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300' }}">
                             {{ $notification->title }}
                             @if(is_null($notification->user_id))
-                                <span class="ml-2 px-2 py-0.5 rounded text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">Pengumuman Umum</span>
+                                <span class="ml-2 px-2 py-0.5 rounded text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">{{ __('settings/notification.notification-list.all') }}</span>
                             @endif
                         </h4>
                         <span class="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">

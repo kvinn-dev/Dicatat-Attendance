@@ -6,14 +6,14 @@
         <div>
             <!-- Breadcrumb -->
             <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3">
-                <a href="{{ route('settings.index') }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Pengaturan</a>
+                <a href="{{ route('settings.index') }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{{ __('settings/notification.breadcrumb-before') }}</a>
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
-                <span class="text-gray-900 dark:text-gray-100 font-medium">Kelola Notifikasi</span>
+                <span class="text-gray-900 dark:text-gray-100 font-medium">{{ __('settings/notification.breadcrumb-now') }}</span>
             </div>
             
-            <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Kelola Notifikasi Karyawan</h2>
+            <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ __('settings/notification.title-admin') }}</h2>
         </div>
     </div>
 
@@ -28,20 +28,20 @@
         <!-- Form Buat Notifikasi -->
         <div class="lg:col-span-1">
             <div class="bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700 rounded-xl p-6">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Buat Notifikasi Baru</h3>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('settings/notification.new-notification.label') }}</h3>
                 <form action="{{ route('settings.notification.store') }}" method="POST" class="space-y-4">
                     @csrf
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Judul Notifikasi</label>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __('settings/notification.new-notification.notification-title') }}</label>
                         <input type="text" name="title" required class="w-full rounded-lg border border-gray-300 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Isi Pesan</label>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __('settings/notification.new-notification.notification-message') }}</label>
                         <textarea name="content" rows="4" required class="w-full rounded-lg border border-gray-300 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 transition"></textarea>
-                        <p class="text-xs text-gray-500 mt-1">Notifikasi ini akan dikirim ke seluruh karyawan.</p>
+                        <p class="text-xs text-gray-500 mt-1">{{ __('settings/notification.new-notification.description') }}</p>
                     </div>
                     <button type="submit" class="w-full inline-flex items-center justify-center px-4 py-2 bg-indigo-600 text-sm text-white rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
-                        Kirim Notifikasi
+                        {{ __('settings/notification.new-notification.send') }}
                     </button>
                 </form>
             </div>
@@ -51,7 +51,7 @@
         <div class="lg:col-span-2">
             <div class="bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
                 <div class="p-6 border-b border-gray-200 dark:border-gray-700">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Daftar Notifikasi Terkirim</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ __('settings/notification.notification-list.label-admin') }}</h3>
                 </div>
                 <div class="divide-y divide-gray-100 dark:divide-gray-700 max-h-[600px] overflow-y-auto">
                     @forelse($notifications as $notification)
@@ -60,7 +60,7 @@
                                 <div class="flex items-center gap-2 mb-1">
                                     <h4 class="text-sm font-semibold text-gray-900 dark:text-white">{{ $notification->title }}</h4>
                                     @if(is_null($notification->user_id))
-                                        <span class="px-2 py-0.5 rounded text-[10px] font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">Semua</span>
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">{{ __('settings/notification.notification-list.all') }}</span>
                                     @endif
                                 </div>
                                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">{{ $notification->content }}</p>

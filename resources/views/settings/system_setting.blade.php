@@ -4,14 +4,14 @@
 <div class="mb-6">
     <!-- Breadcrumb -->
     <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3">
-        <a href="{{ route('settings.index') }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Pengaturan</a>
+        <a href="{{ route('settings.index') }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{{ __('settings/system-setting.breadcrumb-before') }}</a>
         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
-        <span class="text-gray-900 dark:text-gray-100 font-medium">Sistem</span>
+        <span class="text-gray-900 dark:text-gray-100 font-medium">{{ __('settings/system-setting.breadcrumb-now') }}</span>
     </div>
 
-    <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Pengaturan Sistem</h2>
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ __('settings/system-setting.title') }}</h2>
 </div>
 
 <div class="bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 rounded-xl p-6 md:p-8 max-w-4xl">
@@ -32,7 +32,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Pilihan Bahasa -->
             <div>
-                <label for="language" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Bahasa Sistem</label>
+                <label for="language" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ __('settings/system-setting.general.language.label') }}</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -53,7 +53,7 @@
 
             <!-- Pilihan Tema -->
             <div>
-                <label for="theme" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tema Tampilan</label>
+                <label for="theme" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ __('settings/system-setting.general.theme.label') }}</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -61,9 +61,9 @@
                         </svg>
                     </div>
                     <select id="theme" name="theme" class="block w-full pl-10 appearance-none rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-4 py-2.5 transition-colors">
-                        <option value="light">Mode Terang</option>
-                        <option value="dark">Mode Gelap</option>
-                        <option value="system">Ikuti Sistem (Default)</option>
+                        <option value="light">{{ __('settings/system-setting.general.theme.options.light') }}</option>
+                        <option value="dark">{{ __('settings/system-setting.general.theme.options.dark') }}</option>
+                        <option value="system">{{ __('settings/system-setting.general.theme.options.system') }}</option>
                     </select>
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                         <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,36 +76,55 @@
 
         @if(auth()->user()->role === 'admin')
         <div class="pt-6 mt-6 border-t border-gray-200 dark:border-gray-700">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-5">Pengaturan Jadwal Kerja</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-5">{{ __('settings/system-setting.work_schedule.title') }}</h3>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Jam Masuk</label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ __('settings/system-setting.work_schedule.start_time') }}</label>
                     <input type="time" name="work_start_time" value="{{ $settings['work_start_time'] ?? '09:00' }}" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-4 py-2.5 transition-colors">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Jam Pulang</label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ __('settings/system-setting.work_schedule.end_time') }}</label>
                     <input type="time" name="work_end_time" value="{{ $settings['work_end_time'] ?? '17:00' }}" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-4 py-2.5 transition-colors">
                 </div>
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Hari Kerja Efektif</label>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">{{ __('settings/system-setting.work_schedule.work_days.label') }}</label>
+
+                @php
+                $dayMap = [
+                'monday' => 1,
+                'tuesday' => 2,
+                'wednesday' => 3,
+                'thursday' => 4,
+                'friday' => 5,
+                'saturday' => 6,
+                'sunday' => 0,
+                ];
+                @endphp
+
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                    @php
-                    $days = ['1' => 'Senin', '2' => 'Selasa', '3' => 'Rabu', '4' => 'Kamis', '5' => 'Jumat', '6' => 'Sabtu', '0' => 'Minggu'];
-                    @endphp
-                    @foreach($days as $value => $label)
+                    @foreach(['monday','tuesday','wednesday','thursday','friday','saturday','sunday'] as $day)
+                    @php $value = $dayMap[$day]; @endphp
+
                     <label class="relative flex items-center p-3 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-700/80 cursor-pointer transition-all duration-200 group">
-                        <input type="checkbox" name="work_days[]" value="{{ $value }}"
+
+                        <input type="checkbox"
+                            name="work_days[]"
+                            value="{{ $value }}"
                             {{ in_array($value, $settings['work_days'] ?? []) ? 'checked' : '' }}
-                            class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 transition">
-                        <span class="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition-colors">{{ $label }}</span>
+                            class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500 dark:focus:ring-indigo-600 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 transition">
+
+                        <span class="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition-colors">
+                            {{ __("settings/system-setting.work_schedule.work_days.options.$day") }}
+                        </span>
+
                     </label>
                     @endforeach
                 </div>
-                <p class="mt-3 text-xs text-gray-500 dark:text-gray-400">Centang hari di mana karyawan diwajibkan untuk melakukan absensi (Check In & Check Out).</p>
+                <p class="mt-3 text-xs text-gray-500 dark:text-gray-400">{{ __('settings/system-setting.work_schedule.work_days.description') }}</p>
             </div>
         </div>
         @endif
@@ -115,7 +134,7 @@
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                 </svg>
-                Simpan Pengaturan
+                {{ __('settings/system-setting.actions.save') }}
             </button>
         </div>
     </form>
@@ -124,21 +143,23 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const themeSelect = document.getElementById('theme');
-        
+
         // 1. Inisialisasi dropdown dari localStorage saat halaman dimuat
         const currentTheme = localStorage.getItem('theme') || 'system';
         if (themeSelect) {
             themeSelect.value = currentTheme;
         }
-        
+
         // 2. Tangani perubahan saat user memilih tema dari dropdown
         if (themeSelect) {
             themeSelect.addEventListener('change', function(e) {
                 const selectedTheme = e.target.value;
                 localStorage.setItem('theme', selectedTheme); // Simpan ke browser
-                
+
                 // Trigger event global agar Alpine.js memperbarui tampilan
-                window.dispatchEvent(new CustomEvent('theme-changed', { detail: selectedTheme }));
+                window.dispatchEvent(new CustomEvent('theme-changed', {
+                    detail: selectedTheme
+                }));
             });
         }
     });

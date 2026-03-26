@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="mb-6">
-    <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Pengaturan</h2>
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ __('settings/settings.title') }}</h2>
 </div>
 
 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -14,12 +14,12 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
             </div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Pengaturan Profil</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ __('settings/settings.profile.title') }}</h3>
         </div>
-        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Perbarui informasi pribadi dan kata sandi Anda.</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">{{ __('settings/settings.profile.description') }}</p>
         <a href="{{ route('profile.index') }}"
             class="text-sm font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 flex items-center gap-1">
-            Kelola Profil
+            {{ __('settings/settings.profile.action') }}
             <!-- Icon Chevron Right -->
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -37,12 +37,12 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
             </div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Pengaturan Sistem</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ __('settings/settings.system.title') }}</h3>
         </div>
-        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Konfigurasikan preferensi dan pengaturan default aplikasi.</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">{{ __('settings/settings.system.description') }}</p>
         <a href="{{ route('settings.system_setting') }}"
             class="text-sm font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 flex items-center gap-1">
-            Kelola Pengaturan
+            {{ __('settings/settings.system.action') }}
             <!-- Icon Chevron Right -->
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -59,12 +59,12 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
             </div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Notifikasi</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ __('settings/settings.notification.title') }}</h3>
         </div>
-        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Kelola peringatan email dan notifikasi push.</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">{{ __('settings/settings.notification.description') }}</p>
         <a href="{{ auth()->user()->role === 'admin' ? route('settings.notification.admin') : route('settings.notification') }}"
             class="text-sm font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 flex items-center gap-1">
-            Kelola Notifikasi
+            {{ __('settings/settings.notification.action') }}
             <!-- Icon Chevron Right -->
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
                 stroke-linecap="round" stroke-linejoin="round">
