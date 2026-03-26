@@ -18,7 +18,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dicatat | Pemantau Presensimu</title>
+    <title>{{ __('layout.title') }}</title>
     <link rel="icon" type="image/svg" href="{{ asset('favicon.svg') }}">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,22 +83,22 @@
 
                 if ($user->role === 'admin') {
                 $navSections['Main Menu'] = [
-                ['name' => 'Dashboard', 'route' => 'dashboard', 'icon' => $iconDashboard],
-                ['name' => 'Laporan Absensi', 'route' => 'attendances.index', 'icon' => $iconAttendance],
-                ['name' => 'Data Karyawan', 'route' => 'employees.index', 'icon' => $iconEmployee],
-                ['name' => 'Pengajuan Cuti', 'route' => 'leave.index', 'icon' => $iconLeave],
+                ['name' => __('layout.menu_dashboard'), 'route' => 'dashboard', 'icon' => $iconDashboard],
+                ['name' => __('layout.menu_attendances'), 'route' => 'attendances.index', 'icon' => $iconAttendance],
+                ['name' => __('layout.menu_employees'), 'route' => 'employees.index', 'icon' => $iconEmployee],
+                ['name' => __('layout.menu_leaves'), 'route' => 'leave.index', 'icon' => $iconLeave],
                 ];
                 } else {
                 // Employee
                 $navSections['Main Menu'] = [
-                ['name' => 'Dashboard', 'route' => 'dashboard', 'icon' => $iconDashboard],
-                ['name' => 'Pengajuan Cuti', 'route' => 'leave.index', 'icon' => $iconLeave],
-                ['name' => 'Laporan Analisis', 'route' => 'reports.index', 'icon' => $iconReport],
+                ['name' => __('layout.menu_dashboard'), 'route' => 'dashboard', 'icon' => $iconDashboard],
+                ['name' => __('layout.menu_leaves'), 'route' => 'leave.index', 'icon' => $iconLeave],
+                ['name' => __('layout.menu_reports'), 'route' => 'reports.index', 'icon' => $iconReport],
                 ];
                 }
 
                 $navSections['System'] = [
-                ['name' => 'Pengaturan', 'route' => 'settings.index', 'icon' => $iconSettings],
+                ['name' => __('layout.menu_settings'), 'route' => 'settings.index', 'icon' => $iconSettings],
                 ];
                 @endphp
 
@@ -185,7 +185,7 @@
                             class="absolute right-0 mt-2 w-72 sm:w-80 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 z-50">
 
                             <div class="px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-200 border-b border-gray-100 dark:border-gray-700">
-                                Notifikasi
+                                {{ __('layout.notifications') }}
                             </div>
 
                             <div class="max-h-60 overflow-y-auto">
@@ -200,7 +200,7 @@
                                 </template>
 
                                 <div x-show="notifications.length === 0" class="px-4 py-4 text-sm text-center text-gray-500 dark:text-gray-400">
-                                    Tidak ada notifikasi baru
+                                    {{ __('layout.no_notifications') }}
                                 </div>
                             </div>
 
@@ -209,12 +209,12 @@
                                     @csrf
                                     @method('PATCH')
                                     <button type="submit" class="w-full h-full block px-4 py-2 text-xs text-center text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-gray-200 font-medium transition-colors rounded-bl-md">
-                                        Tandai Semua Dibaca
+                                        {{ __('layout.mark_all_read') }}
                                     </button>
                                 </form>
                                 <a href="{{ auth()->user()->role === 'admin' ? route('settings.notification.admin') : route('settings.notification') }}"
                                     class="w-1/2 flex items-center justify-center px-4 py-2 text-xs text-center text-indigo-600 dark:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium transition-colors rounded-br-md">
-                                    Lihat Semua
+                                    {{ __('layout.view_all') }}
                                 </a>
                             </div>
                         </div>
@@ -237,10 +237,10 @@
 
                         <!-- Dropdown Menu -->
                         <div x-show="open" @click.away="open = false" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 z-50" style="display: none;">
-                            <a href="{{ route('profile.index') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Profil Anda</a>
+                            <a href="{{ route('profile.index') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ __('layout.profile') }}</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700">Keluar</button>
+                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700">{{ __('layout.logout') }}</button>
                             </form>
                         </div>
                     </div>
