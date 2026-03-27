@@ -93,7 +93,7 @@
                             <span class="text-gray-600 dark:text-gray-400">{{ __('auth/login.remember') }}</span>
                         </label>
 
-                        <a href="/forgot-password" class="text-blue-600 hover:underline dark:text-blue-400">
+                        <a href="{{ route('password.request') }}" class="text-blue-600 hover:underline dark:text-blue-400">
                             {{ __('auth/login.forgot') }}
                         </a>
                     </div>
