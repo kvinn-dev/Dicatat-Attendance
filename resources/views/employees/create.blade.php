@@ -20,7 +20,7 @@
             </svg>
         </div>
 
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Oops, Gagal!</h3>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ __('employees/create-employee.failed') }}</h3>
 
         <div class="text-sm text-gray-500 dark:text-gray-400 mb-6 flex flex-col items-center text-center">
             @if(session('error'))
@@ -42,7 +42,7 @@
 
         <button @click="show = false"
             class="w-full inline-flex justify-center px-4 py-2.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-sm font-medium rounded-xl transition-colors">
-            Tutup
+            {{ __('employees/create-employee.close') }}
         </button>
     </div>
 </div>
@@ -52,10 +52,10 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
             <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
-                Tambah Karyawan Baru
+                {{ __('employees/create-employee.title') }}
             </h1>
             <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                Karyawan akan menerima notifikasi untuk segera mengubah kata sandinya setelah login pertama kali.
+                {{ __('employees/create-employee.subtitle') }}
             </p>
         </div>
 
@@ -67,7 +67,7 @@
                 <path d="M15 19l-7-7 7-7" />
             </svg>
 
-            <span>Kembali ke daftar</span>
+            <span>{{ __('employees/create-employee.back') }}</span>
         </a>
     </div>
 
@@ -78,7 +78,7 @@
             <!-- Nama & Email -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nama Lengkap <span class="text-red-500">*</span></label>
+                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __('employees/create-employee.name') }} <span class="text-red-500">*</span></label>
                     <input type="text" name="name" id="name" value="{{ old('name') }}" required
                         class="block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-indigo-500 focus:border-indigo-500 transition-colors @error('name') border-red-500 @enderror">
                     @error('name')
@@ -87,7 +87,7 @@
                 </div>
 
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email <span class="text-red-500">*</span></label>
+                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __('employees/create-employee.email') }} <span class="text-red-500">*</span></label>
                     <input type="email" name="email" id="email" value="{{ old('email') }}" required
                         class="block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-indigo-500 focus:border-indigo-500 transition-colors @error('email') border-red-500 @enderror">
                     @error('email')
@@ -99,7 +99,7 @@
             <!-- Kata Sandi -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kata Sandi Sementara <span class="text-red-500">*</span></label>
+                    <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __('employees/create-employee.password') }} <span class="text-red-500">*</span></label>
                     <input type="password" name="password" id="password" required
                         class="block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-indigo-500 focus:border-indigo-500 transition-colors @error('password') border-red-500 @enderror">
                     @error('password')
@@ -108,7 +108,7 @@
                 </div>
 
                 <div>
-                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Konfirmasi Kata Sandi <span class="text-red-500">*</span></label>
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __('employees/create-employee.password_confirmation') }} <span class="text-red-500">*</span></label>
                     <input type="password" name="password_confirmation" id="password_confirmation" required
                         class="block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-indigo-500 focus:border-indigo-500 transition-colors">
                 </div>
@@ -117,7 +117,7 @@
             <!-- Divisi & Jabatan -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="department" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Departemen / Divisi</label>
+                    <label for="department" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __('employees/create-employee.department') }}</label>
                     <input type="text" name="department" id="department" value="{{ old('department') }}"
                         class="block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-indigo-500 focus:border-indigo-500 transition-colors @error('department') border-red-500 @enderror">
                     @error('department')
@@ -126,7 +126,7 @@
                 </div>
 
                 <div>
-                    <label for="position" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jabatan / Jobdesk</label>
+                    <label for="position" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __('employees/create-employee.position') }}</label>
                     <input type="text" name="position" id="position" value="{{ old('position') }}"
                         class="block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-indigo-500 focus:border-indigo-500 transition-colors @error('position') border-red-500 @enderror">
                     @error('position')
@@ -139,7 +139,7 @@
             <div class="flex justify-end pt-6 border-t border-gray-200 dark:border-gray-700 mt-6">
                 <button type="submit"
                     class="px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors shadow-sm">
-                    Simpan Karyawan
+                    {{ __('employees/create-employee.button') }}
                 </button>
             </div>
         </form>

@@ -20,7 +20,7 @@
             </svg>
         </div>
 
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ __('employees.success_title') }}</h3>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ __('employees/employees.success_title') }}</h3>
 
         <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">
             {{ session('success') }}
@@ -28,7 +28,7 @@
 
         <button @click="show = false"
             class="w-full inline-flex justify-center px-4 py-2.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-sm font-medium rounded-xl transition-colors">
-            {{ __('employees.continue') }}
+            {{ __('employees/employees.continue') }}
         </button>
     </div>
 </div>
@@ -50,7 +50,7 @@
                 name="search"
                 value="{{ request('search') }}"
                 class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg leading-5 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-150 ease-in-out"
-                placeholder="{{ __('employees.search') }}">
+                placeholder="{{ __('employees/employees.search') }}">
         </form>
 
         <!-- Add Employee -->
@@ -62,7 +62,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
-            {{ __('employees.employee_add') }}
+            {{ __('employees/employees.employee_add') }}
         </a>
     </div>
 
@@ -72,11 +72,11 @@
             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                 <thead class="bg-gray-50 dark:bg-gray-700/50">
                     <tr>
-                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{{ __('employees.employee_name') }}</th>
-                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{{ __('employees.employee_department') }}</th>
-                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{{ __('employees.employee_job_title') }}</th>
-                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{{ __('employees.status') }}</th>
-                        <th class="relative px-6 py-3"><span class="sr-only">{{ __('employees.actions') }}</span></th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{{ __('employees/employees.employee_name') }}</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{{ __('employees/employees.employee_department') }}</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{{ __('employees/employees.employee_job_title') }}</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{{ __('employees/employees.status') }}</th>
+                        <th class="relative px-6 py-3"><span class="sr-only">{{ __('employees/employees.actions') }}</span></th>
                     </tr>
                 </thead>
                 <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -114,7 +114,7 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             <span class="px-2 py-0.5 inline-flex text-sm leading-5 font-regular rounded-full
                                 {{ $employee->status === 'inactive' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300' : 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' }}">
-                                {{ $employee->status ? __('employees.status_' . $employee->status) : __('employees.status_active') }}
+                                {{ $employee->status ? __('employees/employees.status_' . $employee->status) : __('employees.status_active') }}
                             </span>
                         </td>
 
@@ -122,7 +122,7 @@
                             <!-- Edit Button -->
                             <a href="{{ route('employees.edit', $employee->id) }}"
                                 class="inline-flex items-center justify-center h-8 w-8 rounded-md bg-green-100 dark:bg-green-700 text-green-600 dark:text-green-200 hover:bg-green-200 dark:hover:bg-green-600 transition"
-                                title="{{ __('employees.edit') }}">
+                                title="{{ __('employees/employees.edit') }}">
                                 <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15.232 5.232l3.536 3.536M9 11l6-6 3.536 3.536-6 6H9v-3.536z" />
@@ -133,7 +133,7 @@
                             <button
                                 @click.prevent="selectedEmployee = {{ $employee->id }}; showDeleteModal = true"
                                 class="inline-flex items-center justify-center h-8 w-8 rounded-md bg-red-100 dark:bg-red-700 text-red-600 dark:text-red-200 hover:bg-red-200 dark:hover:bg-red-600 transition"
-                                title="{{ __('employees.delete') }}">
+                                title="{{ __('employees/employees.delete') }}">
                                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M1 7h22M8 7V4a1 1 0 011-1h6a1 1 0 011 1v3" />
@@ -144,7 +144,7 @@
                     @empty
                     <tr>
                         <td colspan="5" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
-                            {{ __('employees.no_data') }}
+                            {{ __('employees/employees.no_data') }}
                         </td>
                     </tr>
                     @endforelse
@@ -170,22 +170,22 @@
                 x-transition:leave-start="opacity-100 scale-100"
                 x-transition:leave-end="opacity-0 scale-95">
 
-                <h3 class="text-lg font-semibold mb-1 text-gray-900 dark:text-white">{{ __('employees.delete_confirm_title') }}</h3>
+                <h3 class="text-lg font-semibold mb-1 text-gray-900 dark:text-white">{{ __('employees/employees.delete_confirm_title') }}</h3>
                 <p class="text-sm text-gray-700 dark:text-gray-300 mb-7">
-                    {{ __('employees.delete_confirm_text') }}
+                    {{ __('employees/employees.delete_confirm_text') }}
                 </p>
 
                 <div class="flex justify-end gap-2">
                     <button @click="showDeleteModal=false"
                         class="px-2.5 py-1 bg-gray-600 text-white text-sm rounded-lg hover:bg-gray-700">
-                        {{ __('employees.cancel') }}
+                        {{ __('employees/employees.cancel') }}
                     </button>
 
                     <form :action="`/employees/${selectedEmployee}`" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="px-2.5 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700">
-                            {{ __('employees.delete_confirm_button') }}
+                            {{ __('employees/employees.delete_confirm_button') }}
                         </button>
                     </form>
                 </div>
