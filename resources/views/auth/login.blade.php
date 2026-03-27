@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masuk - Dicatat</title>
+    <title>{{ __('auth/login.title') }}</title>
     <link rel="icon" type="image/svg" href="{{ asset('favicon.svg') }}">
     <!-- Menggunakan Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -52,10 +52,10 @@
                 <!-- Header -->
                 <div class="text-center">
                     <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-                        Selamat Datang Kembali
+                        {{ __('auth/login.label') }}
                     </h1>
                     <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                        Silakan masuk ke akun Anda untuk melanjutkan
+                        {{ __('auth/login.sub-label') }}
                     </p>
                 </div>
 
@@ -72,43 +72,43 @@
 
                     <!-- Email -->
                     <div>
-                        <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                        <label class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('auth/login.email') }}</label>
                         <input type="email" name="email"
                             class="mt-1 w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50 placeholder-gray-400 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                            placeholder="Masukkan Email">
+                            placeholder="{{ __('auth/login.email_placeholder') }}">
                     </div>
 
                     <!-- Password -->
                     <div>
-                        <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Kata Sandi</label>
+                        <label class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('auth/login.password') }}</label>
                         <input type="password" name="password"
                             class="mt-1 w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50 placeholder-gray-400 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                            placeholder="Masukkan Kata Sandi">
+                            placeholder="{{ __('auth/login.password_placeholder') }}">
                     </div>
 
                     <!-- Remember -->
                     <div class="flex items-center justify-between text-sm">
                         <label class="flex items-center space-x-2">
                             <input type="checkbox" class="rounded border-gray-300 text-blue-600">
-                            <span class="text-gray-600 dark:text-gray-400">Ingat saya</span>
+                            <span class="text-gray-600 dark:text-gray-400">{{ __('auth/login.remember') }}</span>
                         </label>
 
                         <a href="/forgot-password" class="text-blue-600 hover:underline dark:text-blue-400">
-                            Lupa password?
+                            {{ __('auth/login.forgot') }}
                         </a>
                     </div>
 
                     <!-- Button -->
                     <button type="submit"
                         class="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition">
-                        Masuk
+                        {{ __('auth/login.button') }}
                     </button>
 
                     <!-- Register -->
                     <p class="text-center text-sm text-gray-600 dark:text-gray-400">
-                        Belum punya akun?
+                        {{ __('auth/login.no_account') }}
                         <a href="/register" class="text-blue-600 hover:underline dark:text-blue-400">
-                            Daftar
+                            {{ __('auth/login.register') }}
                         </a>
                     </p>
 

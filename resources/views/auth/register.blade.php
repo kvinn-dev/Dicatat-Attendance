@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar - Dicatat</title>
+    <title>{{ __('auth/register.title') }}</title>
+    <link rel="icon" type="image/svg" href="{{ asset('favicon.svg') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -45,8 +46,8 @@
         <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white dark:bg-gray-800 transition-colors duration-300">
             <div class="w-full max-w-md space-y-8">
                 <div class="text-center">
-                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Daftar Akun</h1>
-                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Buat akun baru untuk mengakses sistem</p>
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">{{ __('auth/register.label') }}</h1>
+                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{ __('auth/register.sub-label') }}</p>
                 </div>
 
                 <!-- Global Alert -->
@@ -61,10 +62,10 @@
 
                     <!-- Nama -->
                     <div class="space-y-1">
-                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama Lengkap</label>
+                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('auth/register.name') }}</label>
                         <input type="text" name="name" id="name"
                             class="block w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 @error('name') border-red-500 ring-red-200 dark:ring-red-900 @enderror"
-                            placeholder="Nama lengkap Anda" value="{{ old('name') }}" required>
+                            placeholder="{{ __('auth/register.name_placeholder') }}" required>
                         @error('name')
                         <p class="text-red-500 dark:text-red-400 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -72,10 +73,10 @@
 
                     <!-- Email -->
                     <div class="space-y-1">
-                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('auth/register.email') }}</label>
                         <input type="email" name="email" id="email"
                             class="block w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 @error('email') border-red-500 ring-red-200 dark:ring-red-900 @enderror"
-                            placeholder="Masukkan Email" value="{{ old('email') }}" required>
+                            placeholder="{{ __('auth/register.email_placeholder') }}" required>
                         @error('email')
                         <p class="text-red-500 dark:text-red-400 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -83,10 +84,10 @@
 
                     <!-- Password -->
                     <div class="space-y-1">
-                        <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Kata Sandi</label>
+                        <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('auth/register.password') }}</label>
                         <input type="password" name="password" id="password"
                             class="block w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 @error('password') border-red-500 ring-red-200 dark:ring-red-900 @enderror"
-                            placeholder="Masukkan Kata Sandi" required>
+                            placeholder="{{ __('auth/register.password_placeholder') }}" required>
                         @error('password')
                         <p class="text-red-500 dark:text-red-400 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -94,21 +95,21 @@
 
                     <!-- Konfirmasi Password -->
                     <div class="space-y-1">
-                        <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Konfirmasi Password</label>
+                        <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('auth/register.password_confirmation') }}</label>
                         <input type="password" name="password_confirmation" id="password_confirmation"
                             class="block w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                            placeholder="Konfirmasi Kata Sandi" required>
+                            placeholder="{{ __('auth/register.password_confirmation_placeholder') }}" required>
                     </div>
 
                     <!-- Role -->
                     <div class="space-y-1">
-                        <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Role</label>
+                        <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('auth/register.role') }}</label>
                         <select name="role" id="role"
                             class="block w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 @error('role') border-red-500 ring-red-200 dark:ring-red-900 @enderror"
                             required>
-                            <option value="">-- Pilih Role --</option>
-                            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="employee" {{ old('role') == 'employee' ? 'selected' : '' }}>Karyawan</option>
+                            <option value="">{{ __('auth/register.role_placeholder') }}</option>
+                            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>{{ __('auth/register.admin') }}</option>
+                            <option value="employee" {{ old('role') == 'employee' ? 'selected' : '' }}>{{ __('auth/register.employee') }}</option>
                         </select>
                         @error('role')
                         <p class="text-red-500 dark:text-red-400 text-xs mt-1">{{ $message }}</p>
@@ -117,13 +118,13 @@
 
                     <!-- Tombol Daftar -->
                     <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800 transition duration-200 transform hover:-translate-y-0.5">
-                        Daftar Akun
+                        {{ __('auth/register.button') }}
                     </button>
 
                     <!-- Link Login -->
                     <p class="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
-                        Sudah punya akun?
-                        <a href="{{ Route::has('login') ? route('login') : '#' }}" class="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition">Masuk</a>
+                        {{ __('auth/register.have_account') }}
+                        <a href="{{ Route::has('login') ? route('login') : '#' }}" class="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition">{{ __('auth/register.login') }}</a>
                     </p>
                 </form>
             </div>
