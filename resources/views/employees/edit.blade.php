@@ -1,10 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
+@if(session('error') || $errors->any())
+<div x-data="{ show: true }" x-show="show" x-cloak
+    class="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+    <div @click.away="show = false"
+        class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-sm w-full p-6 text-center transform transition-all"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95">
+
+        <div class="mx-auto flex items-center justify-center h-14 w-14 rounded-full bg-red-100 dark:bg-red-900/40 mb-4">
+            <svg class="h-7 w-7 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </div>
+
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ __('employees/edit-employee.failed') }}</h3>
+
+        <div class="text-sm text-gray-500 dark:text-gray-400 mb-6 flex flex-col items-center text-center">
+            @if(session('error'))
+            <p class="text-red-600 dark:text-red-400 font-medium">
+                {{ session('error') }}
+            </p>
+            @endif
+
+            @if($errors->any())
+            <div class="mt-2 space-y-2">
+                @foreach($errors->all() as $error)
+                <div class="text-red-600 dark:text-red-400">
+                    {{ $error }}
+                </div>
+                @endforeach
+            </div>
+            @endif
+        </div>
+
+        <button @click="show = false"
+            class="w-full inline-flex justify-center px-4 py-2.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-sm font-medium rounded-xl transition-colors">
+            {{ __('employees/edit-employee.close') }}
+        </button>
+    </div>
+</div>
+@endif
+
 <div class="max-w-4xl mx-auto">
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
-            Edit Karyawan
+            {{ __('employees/edit-employee.title') }}
         </h1>
 
         <a href="{{ route('employees.index') }}"
@@ -15,7 +61,7 @@
                 <path d="M15 19l-7-7 7-7" />
             </svg>
 
-            <span>Kembali ke daftar</span>
+            <span>{{ __('employees/edit-employee.back') }}</span>
         </a>
     </div>
 
@@ -27,7 +73,7 @@
             <!-- Nama & Email -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nama Lengkap</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __('employees/edit-employee.name') }}</label>
                     <input type="text" name="name" id="name" value="{{ old('name', $employee->user->name) }}"
                         class="block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-indigo-500 focus:border-indigo-500 transition-colors @error('name') border-red-500 @enderror">
                     @error('name')
@@ -36,7 +82,7 @@
                 </div>
 
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __('employees/edit-employee.email') }}</label>
                     <input type="email" name="email" id="email" value="{{ old('email', $employee->user->email) }}"
                         class="block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-indigo-500 focus:border-indigo-500 transition-colors @error('email') border-red-500 @enderror">
                     @error('email')
@@ -48,7 +94,7 @@
             <!-- Divisi & Jabatan -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="department" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Departemen / Divisi</label>
+                    <label for="department" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __('employees/edit-employee.department') }}</label>
                     <input type="text" name="department" id="department" value="{{ old('department', $employee->department) }}"
                         class="block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-indigo-500 focus:border-indigo-500 transition-colors @error('department') border-red-500 @enderror">
                     @error('department')
@@ -57,7 +103,7 @@
                 </div>
 
                 <div>
-                    <label for="position" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jabatan / Jobdesk</label>
+                    <label for="position" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __('employees/edit-employee.position') }}</label>
                     <input type="text" name="position" id="position" value="{{ old('position', $employee->position) }}"
                         class="block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-indigo-500 focus:border-indigo-500 transition-colors @error('position') border-red-500 @enderror">
                     @error('position')
@@ -68,11 +114,11 @@
 
             <!-- Status -->
             <div>
-                <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status Karyawan</label>
+                <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __('employees/edit-employee.status') }}</label>
                 <select name="status" id="status"
                     class="block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-indigo-500 focus:border-indigo-500 transition-colors @error('status') border-red-500 @enderror">
-                    <option value="active" {{ old('status', $employee->status) === 'active' ? 'selected' : '' }}>Aktif</option>
-                    <option value="inactive" {{ old('status', $employee->status) === 'inactive' ? 'selected' : '' }}>Tidak Aktif</option>
+                    <option value="active" {{ old('status', $employee->status) === 'active' ? 'selected' : '' }}>{{ __('employees/edit-employee.status_active') }}</option>
+                    <option value="inactive" {{ old('status', $employee->status) === 'inactive' ? 'selected' : '' }}>{{ __('employees/edit-employee.status_inactive') }}</option>
                 </select>
                 @error('status')
                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -83,7 +129,7 @@
             <div class="flex justify-end pt-6 border-t border-gray-200 dark:border-gray-700 mt-6">
                 <button type="submit"
                     class="px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors shadow-sm">
-                    Simpan Perubahan
+                    {{ __('employees/edit-employee.button') }}
                 </button>
             </div>
         </form>
