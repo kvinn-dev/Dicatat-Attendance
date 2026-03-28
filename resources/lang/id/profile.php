@@ -12,6 +12,9 @@ return [
         'fields' => [
             'name' => 'Nama',
             'email' => 'Email',
+            'phone' => 'No. Handphone',
+            'department' => 'Divisi / Departemen',
+            'position' => 'Posisi',
         ],
 
         'actions' => [

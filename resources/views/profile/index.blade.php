@@ -14,10 +14,10 @@
     <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ __('profile.title') }}</h2>
 </div>
 
-<div class="space-y-6">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
     <!-- Profile Information -->
     <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-xl border border-gray-100 dark:border-gray-700">
-        <div class="max-w-xl">
+        <div class="w-full">
             <header>
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                     {{ __('profile.profile_info.title') }}
@@ -47,13 +47,42 @@
                     @enderror
                 </div>
 
+            @if($user->role === 'employee')
+                <!-- Phone -->
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('profile.profile_info.fields.phone') }}</label>
+                    <input type="text" name="phone" id="phone" value="{{ old('phone', $user->employee?->phone ?? '') }}" class="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2">
+                    @error('phone')
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Department -->
+                <div>
+                    <label for="department" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('profile.profile_info.fields.department') }}</label>
+                    <input type="text" name="department" id="department" value="{{ old('department', $user->employee->department ?? '') }}" class="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2">
+                    @error('department')
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Position -->
+                <div>
+                    <label for="position" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('profile.profile_info.fields.position') }}</label>
+                    <input type="text" name="position" id="position" value="{{ old('position', $user->employee->position ?? '') }}" class="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2">
+                    @error('position')
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    @enderror
+                </div>
+                @endif
+
                 <div class="flex items-center gap-4">
                     <button type="submit" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                         {{ __('profile.profile_info.actions.save') }}
                     </button>
 
                     @if (session('success') === 'Profil berhasil diperbarui.')
-                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-gray-600 dark:text-gray-400">Tersimpan.</p>
+                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)" class="text-sm text-green-600 dark:text-green-400 font-medium">Tersimpan.</p>
                     @endif
                 </div>
             </form>
@@ -62,7 +91,7 @@
 
     <!-- Update Password -->
     <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-xl border border-gray-100 dark:border-gray-700">
-        <div class="max-w-xl">
+        <div class="w-full">
             <header>
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                     {{ __('profile.change_password.title') }}

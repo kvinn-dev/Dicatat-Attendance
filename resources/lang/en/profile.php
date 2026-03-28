@@ -12,6 +12,9 @@ return [
         'fields' => [
             'name' => 'Name',
             'email' => 'Email',
+            'phone' => 'Phone Number',
+            'department' => 'Department / Division',
+            'position' => 'Position / Job Title',
         ],
 
         'actions' => [
