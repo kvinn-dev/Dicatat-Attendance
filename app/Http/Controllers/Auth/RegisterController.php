@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -23,13 +25,35 @@ class RegisterController extends Controller
             'role' => 'required|in:admin,employee',
         ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $request->role,
-        ]);
+        DB::beginTransaction();
 
-        return redirect()->route('login')->with('success', 'Akun berhasil dibuat, silakan login.');
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+            ]);
+
+            if ($request->role === 'employee') {
+                $lastEmployee = Employee::latest('id')->first();
+                $nextNumber = $lastEmployee ? ((int) substr($lastEmployee->employee_id, 4)) + 1 : 1;
+                $employeeId = 'EMP-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+
+                $employee = new Employee();
+                $employee->user_id = $user->id;
+                $employee->employee_id = $employeeId;
+                $employee->department = '-';
+                $employee->position = '-';
+                $employee->status = 'active';
+                $employee->save();
+            }
+
+            DB::commit();
+            return redirect()->route('login')->with('success', 'Akun berhasil dibuat, silakan login.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withInput()->with('error', 'Terjadi kesalahan sistem, karyawan gagal ditambahkan.');
+        }
     }
 }

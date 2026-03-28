@@ -65,6 +65,16 @@
                     {{ session('status') }}
                 </div>
                 @endif
+                @if (session('success'))
+                <div class="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-600 dark:text-green-400 px-4 py-3 rounded-lg text-sm">
+                    {{ session('success') }}
+                </div>
+                @endif
+                @if (session('error'))
+                <div class="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
+                    {{ session('error') }}
+                </div>
+                @endif
 
                 <!-- Form -->
                 <form action="{{ route('login') }}" method="POST" class="space-y-5">
@@ -89,7 +99,7 @@
                     <!-- Remember -->
                     <div class="flex items-center justify-between text-sm">
                         <label class="flex items-center space-x-2">
-                            <input type="checkbox" class="rounded border-gray-300 text-blue-600">
+                            <input type="checkbox" name="remember" class="rounded border-gray-300 text-blue-600">
                             <span class="text-gray-600 dark:text-gray-400">{{ __('auth/login.remember') }}</span>
                         </label>
 

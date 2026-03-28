@@ -56,6 +56,11 @@
                     {{ session('status') }}
                 </div>
                 @endif
+                @if (session('error'))
+                <div class="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
+                    {{ session('error') }}
+                </div>
+                @endif
 
                 <form action="{{ route('register') }}" method="POST" class="mt-8 space-y-6">
                     @csrf

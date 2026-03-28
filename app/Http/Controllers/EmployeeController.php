@@ -70,11 +70,21 @@ class EmployeeController extends Controller
             $employeeId = 'EMP-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 
             $user->employee()->create([
+                'user_id' => $user->id,
                 'employee_id' => $employeeId,
                 'department' => $request->department,
                 'position' => $request->position,
                 'status' => 'active',
             ]);
+            $employee = new Employee();
+            $employee->user_id = $user->id;
+            $employee->employee_id = $employeeId;
+            $employee->department = $request->department;
+            $employee->position = $request->position;
+            $employee->department = $request->department ?? '-';
+            $employee->position = $request->position ?? '-';
+            $employee->status = 'active';
+            $employee->save();
 
             // Kirim notifikasi peringatan ganti password ke karyawan baru
             \App\Models\Notification::create([
