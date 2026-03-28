@@ -28,6 +28,13 @@
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Language Switcher -->
+    <div class="absolute top-4 right-4 z-50 flex items-center bg-white dark:bg-gray-800 rounded-full shadow-sm px-3 py-1.5 border border-gray-200 dark:border-gray-700">
+        <a href="{{ route('switch-language', 'id') }}" class="text-xs font-semibold tracking-wide transition-colors duration-200 {{ app()->getLocale() == 'id' ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300' }}">ID</a>
+        <span class="text-gray-300 dark:text-gray-600 mx-2">|</span>
+        <a href="{{ route('switch-language', 'en') }}" class="text-xs font-semibold tracking-wide transition-colors duration-200 {{ app()->getLocale() == 'en' ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300' }}">EN</a>
+    </div>
+
     <div class="flex min-h-screen">
 
         <!-- Kiri: Ilustrasi -->

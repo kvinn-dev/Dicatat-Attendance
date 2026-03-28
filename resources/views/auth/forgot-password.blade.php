@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lupa Kata Sandi</title>
+    <title>{{ __('auth/forgot-password.title') }}</title>
     <link rel="icon" type="image/svg" href="{{ asset('favicon.svg') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -28,6 +28,13 @@
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Language Switcher -->
+    <div class="absolute top-4 right-4 z-50 flex items-center bg-white dark:bg-gray-800 rounded-full shadow-sm px-3 py-1.5 border border-gray-200 dark:border-gray-700">
+        <a href="{{ route('switch-language', 'id') }}" class="text-xs font-semibold tracking-wide transition-colors duration-200 {{ app()->getLocale() == 'id' ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300' }}">ID</a>
+        <span class="text-gray-300 dark:text-gray-600 mx-2">|</span>
+        <a href="{{ route('switch-language', 'en') }}" class="text-xs font-semibold tracking-wide transition-colors duration-200 {{ app()->getLocale() == 'en' ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300' }}">EN</a>
+    </div>
+
     <div class="flex min-h-screen flex-col lg:flex-row">
 
         <!-- Kiri: Ilustrasi -->
@@ -45,10 +52,10 @@
                 <!-- Header -->
                 <div class="text-center">
                     <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-                        Lupa Kata Sandi?
+                        {{ __('auth/forgot-password.label') }}
                     </h1>
                     <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                        Masukkan alamat email Anda dan kami akan mengirimkan tautan untuk mengatur ulang kata sandi.
+                        {{ __('auth/forgot-password.description') }}
                     </p>
                 </div>
 
@@ -72,20 +79,20 @@
 
                     <!-- Email -->
                     <div>
-                        <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
+                        <label class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('auth/forgot-password.email_label') }}</label>
                         <input type="email" name="email" required
                             class="mt-1 w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none @error('email') border-red-500 @enderror"
-                            placeholder="Masukkan email Anda" value="{{ old('email') }}">
+                            placeholder="{{ __('auth/forgot-password.email_placeholder') }}" value="{{ old('email') }}">
                     </div>
 
                     <!-- Button -->
                     <button type="submit" class="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition shadow-sm">
-                        Kirim Link Reset Password
+                        {{ __('auth/forgot-password.submit_button') }}
                     </button>
 
                     <!-- Back to Login -->
                     <p class="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
-                        Ingat kata sandi Anda? <a href="{{ route('login') }}" class="text-blue-600 hover:underline dark:text-blue-400 font-medium">Kembali ke Login</a>
+                        {{ __('auth/forgot-password.remember_password') }} <a href="{{ route('login') }}" class="text-blue-600 hover:underline dark:text-blue-400 font-medium">{{ __('auth/forgot-password.back_to_login') }}</a>
                     </p>
                 </form>
             </div>
